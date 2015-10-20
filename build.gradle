@@ -1,0 +1,23 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: "java"
+jar{
+    manifest.mainAttributes("Main-Class" : "is.soring.SparkTest")
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    compile 'junit:junit:4.12'
+    compile 'org.apache.commons:commons-lang3:3.0'
+    compile 'com.sparkjava:spark-core:2.3'
+}
+
+sourceSets {
+    main.java.srcDir "src/main"
+}
+
+
