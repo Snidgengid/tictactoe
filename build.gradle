@@ -11,7 +11,7 @@ jar{
 }
 
 dependencies {
-    compile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'com.sparkjava:spark-core:2.3'
 }
