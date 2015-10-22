@@ -3,8 +3,12 @@ repositories {
 }
 
 apply plugin: "java"
+apply plugin: "application"
+
+mainClassName = "is.ru.snidgengid.tictactoe.Main"
+
 jar{
-    manifest.mainAttributes("Main-Class" : "is.soring.SparkTest")
+    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
