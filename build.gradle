@@ -18,10 +18,23 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'com.sparkjava:spark-core:2.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
+    compile 'redis.clients:jedis:2.7.3'
 }
 
 sourceSets {
     main.java.srcDir "src/main"
 }
 
+task stage {
+    dependsOn build
+}
 
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
