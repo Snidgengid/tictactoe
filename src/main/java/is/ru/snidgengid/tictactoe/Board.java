@@ -23,9 +23,22 @@ public class Board {
 	}
 
 	public void setElement(int i, int j, String value) {
-		this.board[i][j] = value;
+		if (checkIfMoveValid(i, j))
+			this.board[i][j] = value;
+		else
+			throw new RuntimeException("Cell already taken! Please try again");
+
 	}
+
 	public String getElement(int i, int j) {
 		return this.board[i][j];
 	}
+
+	private boolean checkIfMoveValid(int i, int j) {
+		if (this.board[i][j] != null)
+			return false;
+		else
+			return true;
+	}
+
 }

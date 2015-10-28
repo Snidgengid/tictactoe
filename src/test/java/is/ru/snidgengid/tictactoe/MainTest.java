@@ -30,4 +30,17 @@ public class MainTest {
 		board.setElement(0,0,"X");
 		assertEquals("X",board.getElement(0,0));
 	}
+	
+	@Test
+	public void testInputValueToBoardInTakenCell() {
+		Board board = new Board();
+		try {
+			board.setElement(0,0,"X");
+			board.setElement(0,0,"O");
+		}
+		catch (RuntimeException exception) {
+			assertEquals("Cell already taken! Please try again", exception.getMessage());
+		}
+	}
+
 }
