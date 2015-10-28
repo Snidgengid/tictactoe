@@ -23,6 +23,12 @@ public class Board {
 		}
 
 	public void checkGame() {
+		checkIfGameIsWonOrDraw();
+		switchPlayer();
+
+	}
+
+	private void checkIfGameIsWonOrDraw() {
 		//This loop checks for a winner in horizontal lines
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			if ( (this.getElement(i,0) != null) && 
@@ -65,9 +71,6 @@ public class Board {
 			}
 		if (counter == 9)
 			this.isDraw = true;
-
-		switchPlayer();
-
 	}
 
 	private	void switchPlayer() {
