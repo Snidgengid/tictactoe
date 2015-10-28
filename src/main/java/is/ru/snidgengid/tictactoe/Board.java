@@ -39,20 +39,31 @@ public class Board {
 				this.whoWon = this.getElement(0,i);
 			}
 		}	
-
+		//check for a diagonal winning line 
 		if (this.getElement(0,0) != null && 
 			this.getElement(0,0) == this.getElement(1,1) && 
 			this.getElement(1,1) == this.getElement(2,2) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,0);
 		}
-
+		//check for a diagonal winning line 
 		if (this.getElement(0,2) != null && 
 			this.getElement(0,2) == this.getElement(1,1) && 
 			this.getElement(1,1) == this.getElement(2,0) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,2);
 		}
+
+		//check if every cell is checked if so it is a draw
+		int counter = 0;
+		for (int i = 0; i < BOARD_SIZE; i++)
+			for(int j = 0; j < BOARD_SIZE; j++) {
+				if (board[i][j] != null)
+					counter++;
+			}
+		if (counter == 9)
+			this.isDraw = true;
+
 	}
 
 	public void setElement(int i, int j, String value) {
@@ -62,6 +73,7 @@ public class Board {
 			throw new RuntimeException("Cell already taken! Please try again");
 	}
 
+	//checks if the cell is already checked if so it is not a valid move
 	private boolean checkIfMoveValid(int i, int j) {
 		if (this.board[i][j] != null)
 			return false;

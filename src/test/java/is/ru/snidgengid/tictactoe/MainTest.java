@@ -125,4 +125,24 @@ public class MainTest {
 		assertEquals(true, board.getIsWon());
 		assertEquals("O", board.getWhoWon());
 	}
+
+	@Test
+	public void testCheckDraw() {
+		Board board = new Board();
+		board.setElement(0,0,"X");
+		board.setElement(0,1,"O");
+		board.setElement(0,2,"X");
+
+		board.setElement(1,0,"X");
+		board.setElement(1,1,"O");
+		board.setElement(1,2,"X");
+
+		board.setElement(2,0,"O");
+		board.setElement(2,1,"X");
+		board.setElement(2,2,"O");
+
+		board.checkGame();
+		assertEquals(true, board.getIsDraw());
+		assertEquals(false, board.getIsWon());
+	}
 }
