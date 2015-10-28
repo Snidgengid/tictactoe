@@ -59,4 +59,15 @@ public class MainTest {
 		board.checkGame();		
 		assertEquals(true, board.getIsWon());
 	}
+
+	@Test
+	public void testHorizontalWinner() {
+		Board board = new Board();
+		board.setElement(1,0,"X");
+		board.setElement(1,1,"X");
+		board.setElement(1,2,"X");
+		board.checkGame();	
+		assertEquals(true, board.getIsWon());
+		
+	}
 }

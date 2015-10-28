@@ -20,8 +20,15 @@ public class Board {
 		}
 
 	public void checkGame() {
-		if (this.board[0][0] == "X" && this.board[0][1] == "X" && this.board[0][2] == "X")
-			this.isWon = true;
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			if ( (this.getElement(i,0) != null) && 
+				(this.getElement(i,0) == this.getElement(i,1)) &&
+				(this.getElement(i,1) == this.getElement(i,2)) ) {
+				this.isWon = true;
+				this.whoWon = this.getElement(0,i);
+			}
+		}
+		
 	}
 
 	public void setElement(int i, int j, String value) {
