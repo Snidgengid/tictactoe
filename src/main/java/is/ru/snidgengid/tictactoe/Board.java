@@ -11,6 +11,7 @@ public class Board {
 	private Boolean isWon;
 	private Boolean isDraw;
 	private String whoWon;
+	private String nextPlayer;
 
 	public Board() {
 		this.board = new String[BOARD_SIZE][BOARD_SIZE];
@@ -18,6 +19,7 @@ public class Board {
 		this.isWon = false;
 		this.isDraw = false;
 		this.whoWon = null;
+		this.nextPlayer = "X";
 		}
 
 	public void checkGame() {
@@ -64,6 +66,15 @@ public class Board {
 		if (counter == 9)
 			this.isDraw = true;
 
+		switchPlayer();
+
+	}
+
+	private	void switchPlayer() {
+		if(nextPlayer == "X")
+			this.nextPlayer = "O";
+		else
+			this.nextPlayer = "X";
 	}
 
 	public void setElement(int i, int j, String value) {
@@ -79,6 +90,10 @@ public class Board {
 			return false;
 		else
 			return true;
+	}
+
+	public String getNextPlayer() {
+		return this.nextPlayer;
 	}
 
 	public void setWhoWon(String winner) {

@@ -145,4 +145,20 @@ public class MainTest {
 		assertEquals(true, board.getIsDraw());
 		assertEquals(false, board.getIsWon());
 	}
+
+
+	@Test
+	public void testNextPlayer() {
+		Board board = new Board();
+		board.checkGame();
+		assertEquals("O",board.getNextPlayer());
+	}
+
+	@Test
+	public void testPlayerThirdRound() {
+		Board board = new Board();
+		board.checkGame();
+		board.checkGame();
+		assertEquals("X",board.getNextPlayer());
+	}
 }
