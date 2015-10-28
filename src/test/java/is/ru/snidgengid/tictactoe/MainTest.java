@@ -65,9 +65,9 @@ public class MainTest {
 		Board board = new Board();
 		board.setElement(1,0,"X");
 		board.setElement(1,1,"X");
-		board.setElement(1,2,"X");
+		board.setElement(1,2,"O");
 		board.checkGame();	
-		assertEquals(true, board.getIsWon());
-		
+		assertEquals(false, board.getIsWon());
+		//assertEquals("X", board.getWhoWon());
 	}
 }

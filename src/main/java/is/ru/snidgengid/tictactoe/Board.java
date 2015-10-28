@@ -17,6 +17,7 @@ public class Board {
 		this.uuid = UUID.randomUUID().toString();
 		this.isWon = false;
 		this.isDraw = false;
+		this.whoWon = null;
 		}
 
 	public void checkGame() {
@@ -43,6 +44,10 @@ public class Board {
 			return false;
 		else
 			return true;
+	}
+
+	public String getWhoWon() {
+		return this.whoWon;
 	}
 
 	public boolean getIsDraw() {
