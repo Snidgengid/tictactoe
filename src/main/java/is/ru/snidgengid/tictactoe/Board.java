@@ -26,10 +26,10 @@ public class Board {
 				(this.getElement(i,0) == this.getElement(i,1)) &&
 				(this.getElement(i,1) == this.getElement(i,2)) ) {
 				this.isWon = true;
-				this.whoWon = this.getElement(0,i);
+				if (this.isWon == true)
+					this.whoWon = this.getElement(i,0);
 			}
 		}
-		
 	}
 
 	public void setElement(int i, int j, String value) {
@@ -46,6 +46,9 @@ public class Board {
 			return true;
 	}
 
+	public void setWhoWon(String winner) {
+		this.whoWon = winner;
+	}
 	public String getWhoWon() {
 		return this.whoWon;
 	}
