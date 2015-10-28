@@ -47,6 +47,16 @@ public class MainTest {
 	public void testInitalStateOfGame() {
 		Board board = new Board();
 		assertEquals(false, board.getIsWon());
+		assertEquals(false, board.getIsDraw());
 	}
 
+	@Test
+	public void testCheckIsWon() {
+		Board board = new Board();
+		board.setElement(0,0,"X");
+		board.setElement(0,1,"X");
+		board.setElement(0,2,"X");
+		board.checkGame();		
+		assertEquals(true, board.getIsWon());
+	}
 }

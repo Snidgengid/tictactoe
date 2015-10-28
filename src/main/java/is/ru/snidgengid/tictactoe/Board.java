@@ -9,12 +9,19 @@ public class Board {
 	private String uuid;
 	private final int BOARD_SIZE = 3;
 	private Boolean isWon;
-
+	private Boolean isDraw;
+	private String whoWon;
 
 	public Board() {
 		this.board = new String[BOARD_SIZE][BOARD_SIZE];
 		this.uuid = UUID.randomUUID().toString();
-		this.isWon = false;	
+		this.isWon = false;
+		this.isDraw = false;
+		}
+
+	public void checkGame() {
+		if (this.board[0][0] == "X" && this.board[0][1] == "X" && this.board[0][2] == "X")
+			this.isWon = true;
 	}
 
 	public void setElement(int i, int j, String value) {
@@ -31,8 +38,20 @@ public class Board {
 			return true;
 	}
 
+	public boolean getIsDraw() {
+		return this.isDraw;
+	}
+
+	public void setIsDraw(boolean isDraw) {
+		this.isDraw = isDraw;
+	}
+
 	public boolean getIsWon() {
 		return this.isWon;
+	}
+
+	public void setIsWon(Boolean isWon) {
+		this.isWon = isWon;
 	}
 
 	public String[][] getBoard() {
