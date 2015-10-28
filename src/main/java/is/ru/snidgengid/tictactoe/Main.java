@@ -1,11 +1,17 @@
 package is.ru.snidgengid.tictactoe;
 
-public class Main {
-	public static void main(String[] args){
-		System.out.println("Hello World");
+import java.util.Arrays;
+
+public class Board {
+
+	private String board[BOARD_SIZE][BOARD_SIZE];
+
+	public Board() {
+		public static final int BOARD_SIZE = 3;
+		this.board = new String[BOARD_SIZE][BOARD_SIZE];
 	}
-	
-	public static int getID(){
-		return 0;
+
+	public String getBoard() {
+		return this.board;
 	}
 }

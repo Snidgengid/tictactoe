@@ -9,7 +9,9 @@ public class MainTest {
 	}
 	
 	@Test
-	public void test_getID() {
-		assertEquals(0, Main.getID());
+	public void testEmptyNewBoard() {
+		String[][] emptyBoard = new String[3][3];
+		Board newBoard = new Board();
+		assertEquals(emptyBoard, newBoard.getBoard();
 	}
 }
