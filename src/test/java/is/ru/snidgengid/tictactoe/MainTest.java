@@ -103,4 +103,26 @@ public class MainTest {
 		assertEquals(false, board.getIsWon());
 		assertEquals(null, board.getWhoWon());
 	}
+
+	@Test
+	public void testDiagonalWinner() {
+		Board board = new Board();
+		board.setElement(0,0,"X");
+		board.setElement(1,1,"X");
+		board.setElement(2,2,"X");
+		board.checkGame();	
+		assertEquals(true, board.getIsWon());
+		assertEquals("X", board.getWhoWon());
+	}
+
+	@Test
+	public void testOtherDiagonalWinner() {
+		Board board = new Board();
+		board.setElement(0,2,"O");
+		board.setElement(1,1,"O");
+		board.setElement(2,0,"O");
+		board.checkGame();	
+		assertEquals(true, board.getIsWon());
+		assertEquals("O", board.getWhoWon());
+	}
 }

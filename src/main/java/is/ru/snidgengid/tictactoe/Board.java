@@ -27,8 +27,7 @@ public class Board {
 				(this.getElement(i,0) == this.getElement(i,1)) &&
 				(this.getElement(i,1) == this.getElement(i,2)) ) {
 				this.isWon = true;
-				//if (this.isWon == true)
-					this.whoWon = this.getElement(i,0);
+				this.whoWon = this.getElement(i,0);
 			}
 		}
 		//This loop checks for a winner in vertical lines
@@ -37,10 +36,23 @@ public class Board {
 				(this.getElement(0,i) == this.getElement(1,i)) &&
 				(this.getElement(1,i) == this.getElement(2,i)) ) {
 				this.isWon = true;
-				//if (this.isWon == true)
-					this.whoWon = this.getElement(0,i);
+				this.whoWon = this.getElement(0,i);
 			}
-		}		
+		}	
+
+		if (this.getElement(0,0) != null && 
+			this.getElement(0,0) == this.getElement(1,1) && 
+			this.getElement(1,1) == this.getElement(2,2) ) {
+				this.isWon = true;
+				this.whoWon = this.getElement(0,0);
+		}
+
+		if (this.getElement(0,2) != null && 
+			this.getElement(0,2) == this.getElement(1,1) && 
+			this.getElement(1,1) == this.getElement(2,0) ) {
+				this.isWon = true;
+				this.whoWon = this.getElement(0,2);
+		}
 	}
 
 	public void setElement(int i, int j, String value) {
