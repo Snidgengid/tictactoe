@@ -38,11 +38,44 @@
 <input id="newGame" type="button" value="New game" onclick="newGame();" />
 <!-- TODO Reset fore new game -->
 
+
 <div class="ErrorText"></div>
-<!--TODO Error handling -->
+<!--Invalid box choose -->
+<script type="text/javascript">
+var Error = "Already taken, choose another box";
+	function ErrorText(){
+		if((canvas1 == 'Y') || (canvas1 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas2 == 'Y') || (canvas2 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas3 == 'Y') || (canvas3 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas4 == 'Y') || (canvas4 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas5 == 'Y') || (canvas5 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas6 == 'Y') || (canvas6 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas7 == 'Y') || (canvas7 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas8 == 'Y') || (canvas8 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+		else if((canvas9 == 'Y') || (canvas9 == 'X')){
+			document.getElementById("ErrorText").innerHTML = Error;
+		}
+	}
+</script>
+
 
 <div class="whoWon"></div>
-
 <!-- Who won the game of Tic Tac Toe check-->
 <script type="text/javascript">
 var textX = "X is the winner";
