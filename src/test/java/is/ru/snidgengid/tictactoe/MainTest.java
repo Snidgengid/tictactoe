@@ -81,4 +81,26 @@ public class MainTest {
 		assertEquals(false, board.getIsWon());
 		assertEquals(null, board.getWhoWon());
 	}
+
+	@Test
+	public void testVerticalWinner() {
+		Board board = new Board();
+		board.setElement(0,1,"O");
+		board.setElement(1,1,"O");
+		board.setElement(2,1,"O");
+		board.checkGame();	
+		assertEquals(true, board.getIsWon());
+		assertEquals("O", board.getWhoWon());
+	}
+
+	@Test
+	public void testVerticalNotWinner() {
+		Board board = new Board();
+		board.setElement(0,1,"X");
+		board.setElement(1,1,"X");
+		board.setElement(2,1,"O");
+		board.checkGame();	
+		assertEquals(false, board.getIsWon());
+		assertEquals(null, board.getWhoWon());
+	}
 }

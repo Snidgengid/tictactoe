@@ -21,15 +21,26 @@ public class Board {
 		}
 
 	public void checkGame() {
+		//This loop checks for a winner in horizontal lines
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			if ( (this.getElement(i,0) != null) && 
 				(this.getElement(i,0) == this.getElement(i,1)) &&
 				(this.getElement(i,1) == this.getElement(i,2)) ) {
 				this.isWon = true;
-				if (this.isWon == true)
+				//if (this.isWon == true)
 					this.whoWon = this.getElement(i,0);
 			}
 		}
+		//This loop checks for a winner in vertical lines
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			if ( (this.getElement(0,i) != null) && 
+				(this.getElement(0,i) == this.getElement(1,i)) &&
+				(this.getElement(1,i) == this.getElement(2,i)) ) {
+				this.isWon = true;
+				//if (this.isWon == true)
+					this.whoWon = this.getElement(0,i);
+			}
+		}		
 	}
 
 	public void setElement(int i, int j, String value) {
