@@ -7,7 +7,7 @@ body{
 .box {
 
 
-	text-align:left;
+	text-align:center;
 	width:auto;
 	height:auto;
 
@@ -54,4 +54,21 @@ body{
     width:auto;
     height:auto;
 
+}
+
+#newGame{
+	padding: 10px;
+	background-color: green;
+	font-size: 15px;
+}
+
+.ErrorText{
+	text-align:center;
+	color: rgb(255,0,0);
+}
+
+.whoWon{
+	text-align:center;
+	font-style: bold;
+	font-size: 20px;
 }
