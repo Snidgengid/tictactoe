@@ -21,4 +21,11 @@ public class Board {
 	public String getUUID() {
 		return this.uuid;
 	}
+
+	public void setElement(int i, int j, String value) {
+		this.board[i][j] = value;
+	}
+	public String getElement(int i, int j) {
+		return this.board[i][j];
+	}
 }

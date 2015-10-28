@@ -24,4 +24,10 @@ public class MainTest {
 		assertEquals(uuidFromString.toString(),board.getUUID());
 	}
 
+	@Test
+	public void testInputValueToBoard() {
+		Board board = new Board();
+		board.setElement(0,0,"X");
+		assertEquals("X",board.getElement(0,0));
+	}
 }
