@@ -20,6 +20,19 @@ public class DatabaseTest{
 		org.junit.runner.JUnitCore.main("is.ru.snidgengid.tictactoeTest");
 	}
 
+	@Before
+    public void populateRedisWithTestData() {
+    	try {
+			Database dbConn = new Database();
+			String boardJSON = "{\"board\":[[null,null,null],[null,null,null],[null,null,null]],\"uuid\":\"636e4b86-ec96-4ab9-b044-ed7713076cf3\",\"isWon\":false,\"isDraw\":false,\"whoWon\":null,\"nextPlayer\":\"X\"}";
+			String boardUUID = "636e4b86-ec96-4ab9-b044-ed7713076cf3";
+			dbConn.setBoard(boardUUID,boardJSON);
+		}
+		catch (Exception ce) {
+			fail("Exception: " + ce.getMessage());
+		}
+    }
+
 	@Test
 	public void testWriteBoardToRedis() {
 		try {
@@ -45,19 +58,5 @@ public class DatabaseTest{
 		catch (Exception ce) {
 			fail("Exception: " + ce.getMessage());
 		}
-
 	}
-
-	@Before
-    public void populateRedisWithTestData() {
-    	try {
-			Database dbConn = new Database();
-			String boardJSON = "{\"board\":[[null,null,null],[null,null,null],[null,null,null]],\"uuid\":\"636e4b86-ec96-4ab9-b044-ed7713076cf3\",\"isWon\":false,\"isDraw\":false,\"whoWon\":null,\"nextPlayer\":\"X\"}";
-			String boardUUID = "636e4b86-ec96-4ab9-b044-ed7713076cf3";
-			dbConn.setBoard(boardUUID,boardJSON);
-		}
-		catch (Exception ce) {
-			fail("Exception: " + ce.getMessage());
-		}
-    }
 }
