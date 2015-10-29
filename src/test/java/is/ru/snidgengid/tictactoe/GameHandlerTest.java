@@ -21,7 +21,7 @@ public class GameHandlerTest {
 		Response res = null;
 		Request req = null;
 		String response = (String)game.newGame(req, res);
-		String expectedResponse = "{\"board\":[[nulll,null,null],[null,null,null],[null,null,null]],\"uuid\":\"636e4b86-ec96-4ab9-b044-ed7713076cf2\",\"isWon\":false,\"isDraw\":false,\"whoWon\":null,\"nextPlayer\":\"X\"}";
+		String expectedResponse = "{\"board\":[[null,null,null],[null,null,null],[null,null,null]],\"uuid\":\"636e4b86-ec96-4ab9-b044-ed7713076cf2\",\"isWon\":false,\"isDraw\":false,\"whoWon\":null,\"nextPlayer\":\"X\"}";
 		assertEquals(response,expectedResponse);
 	}
 
