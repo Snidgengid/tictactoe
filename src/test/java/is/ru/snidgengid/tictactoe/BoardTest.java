@@ -192,7 +192,6 @@ public class BoardTest {
 		assertEquals(false, board.getIsWon());
 	}
 
-
 	@Test
 	public void testNextPlayer() {
 		Board board = new Board();
