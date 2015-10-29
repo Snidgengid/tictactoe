@@ -11,9 +11,14 @@ import org.easymock.EasyMock;
 
 
 public class GameHandler {
+	Database dbConn;
+
+	public GameHandler(){
+		dbConn = new Database();
+	}
+
 	public Object newGame(Request req, Response res){	
 		try{
-			Database dbConn = new Database();
 			ObjectMapper mapper = new ObjectMapper();
             Board b = new Board();            
             String jsonInString = mapper.writeValueAsString(b);
@@ -25,5 +30,17 @@ public class GameHandler {
       	catch (Exception e) {
       		return "Error creating new game";
       	}
+	}
+
+	public Object action(Request req, Response res){
+		try{
+			String test = "";
+			return false;
+			//User user = mapper.readValue(jsonInString, User.class);
+
+		}
+		catch(Exception e) {
+			return "Error making action";
+		}
 	}
 }
