@@ -22,6 +22,10 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
     compile 'redis.clients:jedis:2.7.3'
+    compile 'org.cthul:cthul-matchers:1.1.0'
+    compile 'org.easymock:easymock:3.4'
+
+
 }
 
 sourceSets {

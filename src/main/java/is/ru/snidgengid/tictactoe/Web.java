@@ -13,7 +13,6 @@ public class Web {
 
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
-        get("/", (req, res) -> new GameHandler().newGame(req,res));
         get("/newGame", (req, res) -> new GameHandler().newGame(req,res));
     }
 
