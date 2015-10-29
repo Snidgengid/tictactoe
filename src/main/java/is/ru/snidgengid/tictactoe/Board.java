@@ -22,10 +22,10 @@ public class Board {
 		this.nextPlayer = "X";
 		}
 
+	//checks if game is won or draw and switches player
 	public void checkGame() {
 		checkIfGameIsWonOrDraw();
 		switchPlayer();
-
 	}
 
 	private void checkIfGameIsWonOrDraw() {
@@ -36,6 +36,7 @@ public class Board {
 				(this.getElement(i,1) == this.getElement(i,2)) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(i,0);
+				return;
 			}
 		}
 		//This loop checks for a winner in vertical lines
@@ -45,6 +46,7 @@ public class Board {
 				(this.getElement(1,i) == this.getElement(2,i)) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,i);
+				return;
 			}
 		}	
 		//check for a diagonal winning line 
@@ -53,6 +55,7 @@ public class Board {
 			this.getElement(1,1) == this.getElement(2,2) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,0);
+				return;
 		}
 		//check for a diagonal winning line 
 		if (this.getElement(0,2) != null && 
@@ -60,6 +63,7 @@ public class Board {
 			this.getElement(1,1) == this.getElement(2,0) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,2);
+				return;
 		}
 
 		//check if every cell is checked if so it is a draw

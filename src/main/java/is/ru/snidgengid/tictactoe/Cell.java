@@ -1,1 +1,0 @@
-package is.ru.snidgengid.tictactoe;
