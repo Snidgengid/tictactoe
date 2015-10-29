@@ -1,6 +1,8 @@
 package is.ru.snidgengid.tictactoe;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+
 import org.junit.Test;
 import java.util.UUID;
 
@@ -14,7 +16,7 @@ public class MainTest {
 	public void testEmptyNewBoard() {
 		String[][] emptyBoard = new String[3][3];
 		Board newBoard = new Board();
-		assertEquals(emptyBoard, newBoard.getBoard());
+		assertArrayEquals(emptyBoard, newBoard.getBoard());
 	}
 
 	@Test
