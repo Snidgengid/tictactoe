@@ -13,16 +13,17 @@ import org.easymock.EasyMock;
 public class GameHandler {
 	public Object newGame(Request req, Response res){	
 		try{
+			Database dbConn = new Database();
 			ObjectMapper mapper = new ObjectMapper();
             Board b = new Board();            
             String jsonInString = mapper.writeValueAsString(b);
+            dbConn.setBoard(b.getUUID(),jsonInString);
             res.status(200);
             res.type("text/json");
-            return jsonInString;	
-	        //return "{\"board\":[[null,null,null],[null,null,null],[null,null,null]],\"uuid\":\"636e4b86-ec96-4ab9-b044-ed7713076cf2\",\"isWon\":false,\"isDraw\":false,\"whoWon\":null,\"nextPlayer\":\"X\"}";
+            return jsonInString;	        
       	}
       	catch (Exception e) {
-      		return "Error";
+      		return "Error creating new game";
       	}
 	}
 }
