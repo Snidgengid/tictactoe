@@ -4,6 +4,7 @@ repositories {
 
 apply plugin: "java"
 apply plugin: "application"
+apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
@@ -11,6 +12,17 @@ jar{
     manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
+jacocoTestReport {
+    group = "reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
     }
 }
 
@@ -35,6 +47,9 @@ sourceSets {
 task stage {
     dependsOn build
 }
+
+//jacocoTestReport.shouldRunAfter('test')
+
 
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
