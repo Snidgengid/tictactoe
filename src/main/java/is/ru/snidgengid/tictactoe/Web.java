@@ -14,7 +14,10 @@ public class Web {
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         get("/newGame", (req, res) -> new GameHandler().newGame(req,res));
+        put("/action", (req, res) -> new GameHandler().action(req,res));
+
     }
+
 
     static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
