@@ -32,8 +32,8 @@ public class Board {
 		//This loop checks for a winner in horizontal lines
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			if ( (this.getElement(i,0) != null) && 
-				(this.getElement(i,0) == this.getElement(i,1)) &&
-				(this.getElement(i,1) == this.getElement(i,2)) ) {
+				this.getElement(i,0).equals(this.getElement(i,1)) &&
+				this.getElement(i,1).equals(this.getElement(i,2)) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(i,0);
 				return;
@@ -42,8 +42,8 @@ public class Board {
 		//This loop checks for a winner in vertical lines
 		for (int i = 0; i < BOARD_SIZE; i++) {
 			if ( (this.getElement(0,i) != null) && 
-				(this.getElement(0,i) == this.getElement(1,i)) &&
-				(this.getElement(1,i) == this.getElement(2,i)) ) {
+				this.getElement(0,i).equals(this.getElement(1,i)) &&
+				this.getElement(1,i).equals(this.getElement(2,i)) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,i);
 				return;
@@ -51,16 +51,16 @@ public class Board {
 		}	
 		//check for a diagonal winning line 
 		if (this.getElement(0,0) != null && 
-			this.getElement(0,0) == this.getElement(1,1) && 
-			this.getElement(1,1) == this.getElement(2,2) ) {
+			this.getElement(0,0).equals(this.getElement(1,1)) && 
+			this.getElement(1,1).equals(this.getElement(2,2)) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,0);
 				return;
 		}
 		//check for a diagonal winning line 
 		if (this.getElement(0,2) != null && 
-			this.getElement(0,2) == this.getElement(1,1) && 
-			this.getElement(1,1) == this.getElement(2,0) ) {
+			this.getElement(0,2).equals(this.getElement(1,1)) && 
+			this.getElement(1,1).equals(this.getElement(2,0)) ) {
 				this.isWon = true;
 				this.whoWon = this.getElement(0,2);
 				return;
@@ -78,7 +78,7 @@ public class Board {
 	}
 
 	private	void switchPlayer() {
-		if(nextPlayer == "X")
+		if(this.nextPlayer.equals("X"))
 			this.nextPlayer = "O";
 		else
 			this.nextPlayer = "X";
