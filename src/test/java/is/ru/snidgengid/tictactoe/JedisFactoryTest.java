@@ -2,6 +2,7 @@ package is.ru.snidgengid.tictactoe;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.cthul.matchers.CthulMatchers.*;
 import org.junit.Test;
 import spark.Request;
@@ -12,6 +13,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.util.UUID;
 
 
+
 public class JedisFactoryTest{
 	public static void main(String args[]) {
 		org.junit.runner.JUnitCore.main("is.ru.snidgengid.tictactoeTest");
@@ -19,10 +21,18 @@ public class JedisFactoryTest{
 
 	@Test
 	public void testWriteReadToRedis() {
-		Jedis conn = JedisFactory.getInstance().getJedisPool().getResource();
-		String testString = UUID.randomUUID().toString();
-		conn.set("testWriteReadToRedis",testString);
-		String resultString = conn.get("testWriteReadToRedis");
-		assertEquals(testString,resultString);
+		try {
+			Jedis conn = JedisFactory.getInstance().getJedisPool().getResource();
+			String testString = UUID.randomUUID().toString();
+			conn.set("testWriteReadToRedis",testString);
+			String resultString = conn.get("testWriteReadToRedis");
+			assertEquals(testString,resultString);
+			System.out.println(testString);
+			System.out.println(resultString);
+		}
+		catch (Exception ce) {
+			fail("Exception: " + ce.getMessage());
+		}
+
 	}
 }
