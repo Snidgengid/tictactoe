@@ -1,7 +1,9 @@
 language: java
 jdk:
 - oraclejdk8
-sudo: false
+sudo: true
+services:
+  - redis-server
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
@@ -12,5 +14,10 @@ deploy:
   provider: heroku
   app:
     dev: secure-inlet-7452
+    Spark: powerful-savannah-2609 
   api_key:
     secure: K+BcySA1cThs4pmTdamWf4Yof66a9jZaNsN2tM9wLzLUq0nT6UY/qUgfQ5RpN5cXFPvFp1s+vEPRVQa267jWz+1tM9L4ZbSF/oPvnMg89eML7dnWECshk0NxqYe70eTok25+RSwwtZ0428IB6tw0u/AFUNEQUOYJbCV5IEeO2KWT6MaAW6ywIIp6Rm6U0AGyluGJc3p6+oiwLEzBzgxIT7oGp8bwa73sFMiYnSh0zzwm45qPKeqPjQy1OtA/4buWDx2ChPdk3SDkzF6PYq6CZVImuQLZ3P/i+hXp2I8KPlIfwD6YhxS1Y3F91b28RPgpxp+VTl0Q6mU2bmkqRX8ZJBKVqyBXZmu5lHWRcx95mUg6lXEywJoDiSktWyN0CSoZj4jS8s6ZANsv+wnwwpV6FpeURgldx3yjgTY0CstFPrUDTF3UFXovguI/XLludxJoNzBtppjWE9cJ060V164ohyLa0OqPVcSE/u7+7GnDNka691BgfO9IUWpmHkrZqJ3XeRey9E5e22dH3V6YsQe7sv2NmeXeuqAhd0SBioMLcWAnzsr+0E3mTmoP0lX9gPZ6YzOiG8sJAg/24pi8xxq/+ttVfLRlQnuIaVqQx6OnmBWDeAtVbvK07dvoXHPqmVCoHsUobR5NRZuNqXvtLXvGJEtmvJJappOENjikTx02pwY=
+before_install:
+  - sudo pip install codecov
+after_success:
+  - codecov

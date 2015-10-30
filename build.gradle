@@ -4,13 +4,26 @@ repositories {
 
 apply plugin: "java"
 apply plugin: "application"
+apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
+
 
 jar{
     manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
+jacocoTestReport {
+    group = "reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
     }
 }
 
@@ -22,6 +35,10 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
     compile 'redis.clients:jedis:2.7.3'
+    compile 'org.cthul:cthul-matchers:1.1.0'
+    compile 'org.easymock:easymock:3.4'
+
+
 }
 
 sourceSets {
@@ -32,9 +49,15 @@ task stage {
     dependsOn build
 }
 
+check.dependsOn jacocoTestReport
+
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
     from(configurations.compile)
+}
+
+compileJava {
+    options.compilerArgs << '-Xlint:deprecation'
 }
 
 stage.dependsOn(copyToLib)
