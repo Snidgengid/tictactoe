@@ -193,6 +193,33 @@ public class BoardTest {
 	}
 
 	@Test
+	public void testCheckAnotherDraw() {
+		Board board = new Board();
+		board.setElement(0,0,"O");
+		board.setElement(0,1,"X");
+		board.setElement(0,2,"O");
+
+		board.setElement(1,0,"X");
+		board.setElement(1,1,"X");
+		board.setElement(1,2,"O");
+
+		board.setElement(2,0,"O");
+		board.setElement(2,1,"O");
+		board.setElement(2,2,"X");
+
+		board.checkGame();
+		assertEquals(true, board.getIsDraw());
+		assertEquals(false, board.getIsWon());
+		assertEquals(null, board.getWhoWon());
+	}
+
+	@Test
+	public void testFirstPlayer() {
+		Board board = new Board();
+		assertEquals("X",board.getNextPlayer());
+	}
+
+	@Test
 	public void testNextPlayer() {
 		Board board = new Board();
 		board.checkGame();

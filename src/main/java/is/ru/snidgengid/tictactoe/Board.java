@@ -34,8 +34,8 @@ public class Board {
 			if ( (this.getElement(i,0) != null) && 
 				this.getElement(i,0).equals(this.getElement(i,1)) &&
 				this.getElement(i,1).equals(this.getElement(i,2)) ) {
-				this.isWon = true;
-				this.whoWon = this.getElement(i,0);
+				setIsWon(true);
+				setWhoWon(this.getElement(i,0));
 				return;
 			}
 		}
@@ -44,8 +44,8 @@ public class Board {
 			if ( (this.getElement(0,i) != null) && 
 				this.getElement(0,i).equals(this.getElement(1,i)) &&
 				this.getElement(1,i).equals(this.getElement(2,i)) ) {
-				this.isWon = true;
-				this.whoWon = this.getElement(0,i);
+				setIsWon(true);
+				setWhoWon(this.getElement(0,i));
 				return;
 			}
 		}	
@@ -53,16 +53,16 @@ public class Board {
 		if (this.getElement(0,0) != null && 
 			this.getElement(0,0).equals(this.getElement(1,1)) && 
 			this.getElement(1,1).equals(this.getElement(2,2)) ) {
-				this.isWon = true;
-				this.whoWon = this.getElement(0,0);
+				setIsWon(true);
+				setWhoWon(this.getElement(0,0));
 				return;
 		}
 		//check for a diagonal winning line 
 		if (this.getElement(0,2) != null && 
 			this.getElement(0,2).equals(this.getElement(1,1)) && 
 			this.getElement(1,1).equals(this.getElement(2,0)) ) {
-				this.isWon = true;
-				this.whoWon = this.getElement(0,2);
+				setIsWon(true);
+				setWhoWon(this.getElement(0,2));
 				return;
 		}
 
@@ -74,7 +74,7 @@ public class Board {
 					counter++;
 			}
 		if (counter == 9)
-			this.isDraw = true;
+			setIsDraw(true);
 	}
 
 	private	void switchPlayer() {
