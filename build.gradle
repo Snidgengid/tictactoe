@@ -8,12 +8,29 @@ apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
 
 jar{
-    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
+    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Web")
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    dependsOn copyToLib
+}
+
+task myJavadocs(type: Javadoc) {
+  source = sourceSets.main.allJava
+      classpath = configurations.compile
+
+  doLast {
+    copy {
+    from 'build/docs/javadoc'
+    into 'build/resources/main/www/javadoc'
+    }
+  }
 }
 
 
@@ -38,7 +55,6 @@ dependencies {
     compile 'org.cthul:cthul-matchers:1.1.0'
     compile 'org.easymock:easymock:3.4'
 
-
 }
 
 sourceSets {
@@ -49,15 +65,13 @@ task stage {
     dependsOn build
 }
 
-check.dependsOn jacocoTestReport
+compileJava.dependsOn(myJavadocs)
+check.dependsOn(jacocoTestReport, myJavadocs)
 
-task copyToLib(type: Copy) {
-    into "$buildDir/lib"
-    from(configurations.compile)
-}
+
 
 compileJava {
     options.compilerArgs << '-Xlint:deprecation'
 }
 
-stage.dependsOn(copyToLib)
+stage.dependsOn(copyToLib, myJavadocs)
