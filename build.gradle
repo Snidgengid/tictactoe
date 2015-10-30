@@ -65,6 +65,7 @@ task stage {
     dependsOn build
 }
 
+compileJava.dependsOn(myJavadocs)
 check.dependsOn(jacocoTestReport, myJavadocs)
 
 
@@ -73,4 +74,4 @@ compileJava {
     options.compilerArgs << '-Xlint:deprecation'
 }
 
-stage.dependsOn(copyToLib)
+stage.dependsOn(copyToLib, myJavadocs)
