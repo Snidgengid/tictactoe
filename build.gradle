@@ -8,7 +8,6 @@ apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
-sudo = true
 
 jar{
     manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
