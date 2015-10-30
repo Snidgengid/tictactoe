@@ -16,6 +16,16 @@ jar{
     }
 }
 
+task myJavadocs(type: Javadoc) {
+  source = sourceSets.main.allJava
+  doLast {
+    copy {
+    from 'build/docs/javadoc'
+    into 'build/resources/main/www/javadoc'
+    }
+  }
+}
+
 
 jacocoTestReport {
     group = "reporting"
@@ -38,7 +48,6 @@ dependencies {
     compile 'org.cthul:cthul-matchers:1.1.0'
     compile 'org.easymock:easymock:3.4'
 
-
 }
 
 sourceSets {
@@ -49,7 +58,7 @@ task stage {
     dependsOn build
 }
 
-check.dependsOn jacocoTestReport
+check.dependsOn(jacocoTestReport, myJavadocs)
 
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
