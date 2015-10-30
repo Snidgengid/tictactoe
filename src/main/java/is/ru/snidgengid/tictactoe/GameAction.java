@@ -30,7 +30,7 @@ public class GameAction {
 
 	/**
 	* Set UUID 
-	* @param uuid
+	* @param uuid String UUID 
 	**/
 	public void setUUID(String uuid) {
 		this.uuid = uuid;
@@ -46,7 +46,7 @@ public class GameAction {
 
 	/**
 	* Set X coordinate 
-	* @param xCoord
+	* @param xCoord int X Coordinate
 	**/
 	public void setXCoord(int xCoord) {
 		this.xCoord = xCoord;
@@ -62,7 +62,7 @@ public class GameAction {
 
 	/**
 	* Set Y coordinate 
-	* @param yCoord
+	* @param yCoord int Y Coordinate 
 	**/
 	public void setYCoord(int yCoord){
 		this.yCoord = yCoord;

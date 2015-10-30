@@ -107,7 +107,7 @@ public class Board {
 	* @param i (Row)
 	* @param j (Column)
 	* @param value (X or O)
-	* @throws RuntimeException
+	* @throws RuntimeException If value is already set
 	*/
 	public void setElement(int i, int j, String value) {
 		if (checkIfMoveValid(i, j))
@@ -132,7 +132,7 @@ public class Board {
 
 	/**
 	* Returns next player
-	* @return String 
+	* @return String Next Player 
 	*/
 	public String getNextPlayer() {
 		return this.nextPlayer;
@@ -141,7 +141,7 @@ public class Board {
 	/**
 	* Set whoWon
 	*
-	* @param winner 
+	* @param winner Winner
 	*/
 	public void setWhoWon(String winner) {
 		this.whoWon = winner;
@@ -173,7 +173,7 @@ public class Board {
 
 	/**
 	* Get isWon
-	* @return boolean 
+	* @return boolean Is game won
 	**/
 	public boolean getIsWon() {
 		return this.isWon;
@@ -189,7 +189,7 @@ public class Board {
 
 	/**
 	* Get Board
-	* @return String[][] 
+	* @return String[][] Board Array
 	**/
 	public String[][] getBoard() {
 		return this.board;
@@ -207,7 +207,7 @@ public class Board {
 	* Get element from board
 	* @param i Row of element to fetch
 	* @param j Column of element to fetch
-	* @return board 
+	* @return String Value at location 
 	**/
 	public String getElement(int i, int j) {
 		return this.board[i][j];

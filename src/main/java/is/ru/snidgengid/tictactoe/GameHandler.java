@@ -27,7 +27,6 @@ public class GameHandler {
 	* @param req Request
 	* @param res Response
 	* @return String 
-	* @throws Exception
 	*/
 	public Object newGame(Request req, Response res) {
 		try {
@@ -48,7 +47,6 @@ public class GameHandler {
 	* @param request Object (String or Object)
 	* @param res Response
 	* @return String 
-	* @throws Exception
 	*/
 	public Object action(Object request, Response res) {
 		try {
