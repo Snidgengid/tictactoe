@@ -15,7 +15,6 @@ public class Web {
     * Main initializer for Spark Framework that grants HTTP access to TicTacToe
     *
     * @param args String array - not used
-    * @return void
     */
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
@@ -30,7 +29,6 @@ public class Web {
     /**
     * Checks if environmental variable PORT is set and returns it, else it returns 4567
     *
-    * @param 
     * @return Integer with assigned port for Web Service
     */    
     public static int getHerokuAssignedPort() {
