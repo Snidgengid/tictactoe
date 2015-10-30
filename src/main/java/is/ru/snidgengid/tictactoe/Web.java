@@ -8,13 +8,15 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
-
+/**
+* Implementation of TicTacToe web server (main)
+**/
 public class Web {
 
     /**
     * Main initializer for Spark Framework that grants HTTP access to TicTacToe
     *
-    * @param args String array - not used
+    * @param args String array - Not used
     */
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
