@@ -8,16 +8,23 @@ apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
 
 jar{
-    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
+    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Web")
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    dependsOn copyToLib
 }
 
 task myJavadocs(type: Javadoc) {
   source = sourceSets.main.allJava
+      classpath = configurations.compile
+
   doLast {
     copy {
     from 'build/docs/javadoc'
@@ -60,10 +67,7 @@ task stage {
 
 check.dependsOn(jacocoTestReport, myJavadocs)
 
-task copyToLib(type: Copy) {
-    into "$buildDir/lib"
-    from(configurations.compile)
-}
+
 
 compileJava {
     options.compilerArgs << '-Xlint:deprecation'
