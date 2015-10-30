@@ -36,6 +36,10 @@ public class GameHandler {
 
 	public Object action(Object request, Response res){
 		try{
+			//To allow for testing an object request can enter
+			//the function as an object, where it is checked, If
+			//It it a Request then the body content is fetched.
+			//Else its treated as a string which contains the body
 			String body;
 			if (request.getClass().isInstance(Request.class)) {
 				Request req = (Request)request;
