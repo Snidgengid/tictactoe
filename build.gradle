@@ -8,6 +8,8 @@ apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
+sudo = true
+
 jar{
     manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
     from {
@@ -48,12 +50,15 @@ task stage {
     dependsOn build
 }
 
-//jacocoTestReport.shouldRunAfter('test')
-
+check.dependsOn jacocoTestReport
 
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
     from(configurations.compile)
+}
+
+compileJava {
+    options.compilerArgs << '-Xlint:deprecation'
 }
 
 stage.dependsOn(copyToLib)
