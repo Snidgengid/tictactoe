@@ -5,7 +5,7 @@
 
 <!-- Game Handling class -->
 <script type="text/javascript">
-	var = TicTacToe{
+	var TicTacToe = {
 		"board": [[null,null,null], [null,null,null],[null,null,null]],
 		"uuid": "",
 		"isWon": false,
@@ -37,7 +37,16 @@
 
 
 <input id="newGame" type="button" value="New game" onclick="newGame();" />
-<!-- TODO Reset fore new game -->
+
+<script type="text/javascript">
+	newGame: function(){
+		"board": [[null,null,null], [null,null,null],[null,null,null]],
+		"uuid": "",
+		"isWon": false,
+		"isDraw": false,
+		"nextPlayer": "x"
+	}
+</script>
 
 
 <div class="ErrorText"></div>
