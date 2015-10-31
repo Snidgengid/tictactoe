@@ -37,6 +37,10 @@ dependencies {
     compile 'redis.clients:jedis:2.7.3'
     compile 'org.cthul:cthul-matchers:1.1.0'
     compile 'org.easymock:easymock:3.4'
+    compile 'com.saucelabs:sauce_junit:2.1.20'
+    compile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+
+
 
 
 }
