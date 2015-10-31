@@ -3,7 +3,16 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css.css"/>
 
-<script type="text/javascript"></script>
+<!-- Game Handling class -->
+<script type="text/javascript">
+	var TicTacToe = {
+		"board": [[null,null,null], [null,null,null],[null,null,null]],
+		"uuid": "",
+		"isWon": false,
+		"isDraw": false,
+		"nextPlayer": "x"
+	};
+</script>
 
 
 </head>
@@ -26,116 +35,27 @@
 <canvas id = "canvas9"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(9)"></canvas>
 </div>
 
-<script type="text/javascript">
-	function canvasClicked(canvasNumber){
-		<!-- TODO pick a box(Canvas) -->
-
-	}
-</script>
-
-
 
 <input id="newGame" type="button" value="New game" onclick="newGame();" />
-<!-- TODO Reset fore new game -->
+
+<script type="text/javascript">
+	newGame: function(){
+		"board": [[null,null,null], [null,null,null],[null,null,null]],
+		"uuid": "",
+		"isWon": false,
+		"isDraw": false,
+		"nextPlayer": "x"
+	}
+</script>
 
 
 <div class="ErrorText"></div>
 <!--Invalid box choose -->
-<script type="text/javascript">
-var Error = "Already taken, choose another box";
-	function ErrorText(){
-		if((canvas1 == 'Y') || (canvas1 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas2 == 'Y') || (canvas2 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas3 == 'Y') || (canvas3 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas4 == 'Y') || (canvas4 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas5 == 'Y') || (canvas5 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas6 == 'Y') || (canvas6 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas7 == 'Y') || (canvas7 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas8 == 'Y') || (canvas8 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-		else if((canvas9 == 'Y') || (canvas9 == 'X')){
-			document.getElementById("ErrorText").innerHTML = Error;
-		}
-	}
-</script>
 
 
 <div class="whoWon"></div>
 <!-- Who won the game of Tic Tac Toe check-->
-<script type="text/javascript">
-var textX = "X is the winner";
-var texY = "Y is the winner";
-	function whoWon(){
-		<!-- Check if X won -->
-		if((canvas1 == 'X') && (canvas2 == 'X') && (canvas3 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas4 == 'X') && (canvas5 == 'X') && (canvas6 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas7 == 'X') && (canvas8 == 'X') && (canvas9 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas1 == 'X') && (canvas4 == 'X') && (canvas7 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas2 == 'X') && (canvas5 == 'X') && (canvas8 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas3 == 'X') && (canvas6 == 'X') && (canvas9 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas3 == 'X') && (canvas5 == 'X') && (canvas7 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas1 == 'X') && (canvas5 == 'X') && (canvas9 == 'X')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		<!-- Check if Y won -->
-		else if((canvas1 == 'Y') && (canvas2 == 'Y') && (canvas3 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas4 == 'Y') && (canvas5 == 'Y') && (canvas6 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas7 == 'Y') && (canvas8 == 'Y') && (canvas9 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas1 == 'Y') && (canvas4 == 'Y') && (canvas7 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas2 == 'Y') && (canvas5 == 'Y') && (canvas8 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas3 == 'Y') && (canvas6 == 'Y') && (canvas9 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas3 == 'Y') && (canvas5 == 'Y') && (canvas7 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else if((canvas1 == 'Y') && (canvas5 == 'Y') && (canvas9 == 'Y')){
-			document.getElementById("whoWon").innerHTML = textX;
-		}
-		else{
-			document.getElementById("whoWon").innerHTML = "Tie game";
-		}
-	}
-</script>
+
 
 
 </body>
