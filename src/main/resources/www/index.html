@@ -45,8 +45,9 @@ var turn = 0;
   	c = document.getElementById(theCanvas);
   	cxt = c.getContext("2d");
 
+    //Hér er ég að láta X birtast á kassanum þegar leikmaður X ýtir á kassa. 
   	if(painted[canvasNumber-1]== false){
-  		if(turn%2==0){
+  		if(turn%2==0){ //inní if setningunni segir okkur hver er að gera núna.
   			cxt.beginPath();
   			cxt.moveTo(10,10);
   			cxt.lineTo(40,40);
@@ -57,7 +58,7 @@ var turn = 0;
   			content[canvasNumber-1] = 'X';
   		}
   		else
-  		{
+  		{ // Ef leikmaður X er ekki að gera þá birtist O á kassann sem leikmaður O ýtir á.
   			cxt.beginPath();
   			cxt.arc(25,25,20,0,Math.PI*2,true);
   			cxt.stroke();
@@ -69,7 +70,8 @@ var turn = 0;
   squaresFilled++; //Hér er að fyllast í kassana.
   //checkForWinners(content[canvasNumber-1]);
 
-  if(squaresFilled==9){
+//Þegar allir 9 reitirnir eru fullir kemur leik lokið eða þegar í notkun ef ákveðinn reitur ef fullur þá kemur Þegar í notun. 
+  if(squaresFilled==9){ 
   	alert("LEIK LOKIÐ!");
   }
   	}
@@ -77,6 +79,19 @@ var turn = 0;
   		alert("ÞEGAR Í NOTKUN");
   	}
   }
+
+/*function checkForWinners(symbol) //Hér kemur alert þegar einhver vinnur.
+{
+      for(var a = 0; a < winningCombinations.length; a++){
+        if(content[winningCombinations[a][0]]==symbol&&content[winningCombinations[a][1]]==symbol&&content[winningCombinations[a][2]]==symbol){
+          alert(symbol+ "Er sigurvegarinn!");
+          //newGame();
+        }
+      }
+
+
+}*/
+
 
 
 
