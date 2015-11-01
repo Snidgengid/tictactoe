@@ -6,7 +6,6 @@ import spark.Response;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.easymock.EasyMock;
 
 
 /**
@@ -55,7 +54,7 @@ public class GameHandler {
 			//It it a Request then the body content is fetched.
 			//Else its treated as a string which contains the body
 			String body;
-			if (request.getClass().isInstance(Request.class)) {
+			if (request.getClass().getName().equals("spark.webserver.RequestWrapper")) {
 				Request req = (Request)request;
 				body = req.body();
 			} else
