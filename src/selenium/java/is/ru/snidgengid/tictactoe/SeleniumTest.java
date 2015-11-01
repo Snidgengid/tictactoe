@@ -27,7 +27,7 @@ public class SeleniumTest {
     public static void before() {
         driver = new FirefoxDriver();
         port = System.getenv("PORT");
-        if(port == null) {
+        if (port == null) {
             port = "4567";
         }
         baseUrl = "http://localhost:" + port;
@@ -44,7 +44,7 @@ public class SeleniumTest {
         ;
     }
 
-   
+
     @Test
     public void test() throws Exception {
         driver.get(baseUrl + "/");
@@ -58,4 +58,20 @@ public class SeleniumTest {
             verificationErrors.append(e.toString());
         }
     }
+
+    @Test
+    public void testXwon() throws Exception {
+        driver.get(baseUrl + "/");
+        driver.findElement(By.id("canvas1")).click();
+        driver.findElement(By.id("canvas2")).click();
+        driver.findElement(By.id("canvas3")).click();
+        driver.findElement(By.id("canvas6")).click();
+        driver.findElement(By.id("canvas5")).click();
+        driver.findElement(By.id("canvas4")).click();
+        driver.findElement(By.id("canvas8")).click();
+        driver.findElement(By.id("canvas9")).click();
+        driver.findElement(By.id("canvas7")).click();
+        assertEquals("X has won the game!", closeAlertAndGetItsText());
+    }
+
 }
