@@ -13,7 +13,7 @@ public class Web {
 
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
-        staticFileLocation("/public"); 
+        staticFileLocation("/www"); 
         get("/newGame", (req, res) -> new GameHandler().newGame(req,res));
         put("/action", (req, res) -> new GameHandler().action(req,res));
          
@@ -27,7 +27,7 @@ public class Web {
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
-        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+        return 8080; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 }

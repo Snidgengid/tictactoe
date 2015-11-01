@@ -19,7 +19,7 @@ public class WebTest{
 
 	@Test
     public void getHerokuPort() {    	
-    	int expectedPort = 4567;
+    	int expectedPort = 8080;
     	int herokuPort = new Web().getHerokuAssignedPort();
     	assertEquals(expectedPort,herokuPort);  
     }
