@@ -29,7 +29,8 @@ public class GameHandler {
 			Board b = new Board();
 			String jsonInString = mapper.writeValueAsString(b);
 			dbConn.setBoard(b.getUUID(), jsonInString);
-			res.status(200);
+			final int statusOk = 200;
+			res.status(statusOk);
 			res.type("text/json");
 			return jsonInString;
 		} catch (Exception e) {

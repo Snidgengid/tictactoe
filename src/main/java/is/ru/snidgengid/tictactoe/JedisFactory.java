@@ -24,7 +24,8 @@ class JedisFactory {
         redisURI = new URI("redis://localhost:6379");
       }
       JedisPoolConfig poolConfig = new JedisPoolConfig();
-      poolConfig.setMaxTotal(20);
+      final int maxConnections = 20;
+      poolConfig.setMaxTotal(maxConnections);
       jedisPool = new JedisPool(
         poolConfig,
         redisURI
