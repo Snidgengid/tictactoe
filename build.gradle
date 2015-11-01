@@ -77,10 +77,6 @@ dependencies {
 
     seleniumXvfbCompile 'junit:junit:4.12'
     seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
-
-
-
-
 }
 
 
@@ -112,7 +108,7 @@ task stage {
 }
 
 compileJava.dependsOn(myJavadocs)
-check.dependsOn (jacocoTestReport, myJavadocs)
+check.dependsOn(jacocoTestReport, myJavadocs)
 
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
