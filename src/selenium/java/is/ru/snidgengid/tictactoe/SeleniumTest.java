@@ -1,16 +1,15 @@
 package is.ru.snidgengid.tictactoe;
 
-import java.util.concurrent.TimeUnit;
-import static org.junit.Assert.assertEquals;
-
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.WebDriver;
+import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.regex.Pattern;
+import static org.apache.commons.lang3.StringUtils.join;
 
 
 public class SeleniumTest {
