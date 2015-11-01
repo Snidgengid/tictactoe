@@ -7,6 +7,8 @@ import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.BeforeClass;
+import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import java.util.regex.Pattern;
 import static org.apache.commons.lang3.StringUtils.join;
@@ -20,7 +22,7 @@ public class SeleniumTest {
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
-    @BeforeClass
+    @Before
     public static void before() {
         driver = new FirefoxDriver();
         port = System.getenv("PORT");
@@ -31,7 +33,7 @@ public class SeleniumTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    @AfterClass
+    @After
     public static void after() {
         driver.close();
     }
@@ -39,21 +41,6 @@ public class SeleniumTest {
     @Before
     public void setup() {
         ;
-    }
-
-
-    @Test
-    public void test() throws Exception {
-        driver.get(baseUrl + "/");
-        driver.findElement(By.id("canvas1")).click();
-        driver.findElement(By.id("canvas2")).click();
-        driver.findElement(By.id("canvas4")).click();
-        driver.findElement(By.id("newGame")).click();
-        try {
-            assertEquals("", driver.findElement(By.id("newGame")).getAttribute("id=newGame"));
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-        }
     }
 
     @Test
