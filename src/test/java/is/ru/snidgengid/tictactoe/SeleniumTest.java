@@ -185,7 +185,7 @@ public class SeleniumTest implements SauceOnDemandSessionIdProvider {
         driver.get("http://localhost:4567/");
         driver.findElement(By.id("canvas1")).click();
         driver.findElement(By.id("canvas2")).click();
-        driver.findElement(By.id("canvas5")).click();
+        driver.findElement(By.id("canvas4")).click();
         driver.findElement(By.id("newGame")).click();
         try {
             assertEquals("", driver.findElement(By.id("newGam")).getAttribute("id=newGame"));
