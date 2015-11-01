@@ -29,3 +29,7 @@ notifications:
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: always     # options: [always|never|change] default: always
+script:
+- ./gradlew check
+- ./gradlew seleniumXvfb
+- find . 
