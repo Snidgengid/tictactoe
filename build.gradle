@@ -35,11 +35,15 @@ task myJavadocs(type: Javadoc) {
 }
 
 checkstyle {
+    sourceSets = [sourceSets.main]
     configFile = rootProject.file('checkstyle/checkstyle.xml')
     configProperties = [suppressionsFile: rootProject.file('checkstyle/suppressions.xml')]
     toolVersion = '6.11.2'
 }
- 
+tasks.withType(Checkstyle) {
+  exclude 'src/test/java/is/ru/snidgengid/tictactoe'
+}
+
 
 jacocoTestReport {
     group = "reporting"
