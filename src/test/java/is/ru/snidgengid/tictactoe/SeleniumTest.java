@@ -172,7 +172,7 @@ public class SeleniumTest implements SauceOnDemandSessionIdProvider {
 
         this.driver = new RemoteWebDriver(
             new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() +
-                    "@localhost:4445/wd/hub"),
+                    "@ondemand.saucelabs.com/wd/hub"),
             capabilities);
         this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
 
@@ -182,7 +182,7 @@ public class SeleniumTest implements SauceOnDemandSessionIdProvider {
 
     @Test
     public void test() throws Exception {
-        driver.get("http://localhost:4567");
+        driver.get("/");
         driver.findElement(By.id("canvas1")).click();
         driver.findElement(By.id("canvas2")).click();
         driver.findElement(By.id("canvas5")).click();
