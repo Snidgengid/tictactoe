@@ -32,3 +32,4 @@ notifications:
 script:
 - ./gradlew check
 - ./gradlew seleniumXvfb
+- find . 

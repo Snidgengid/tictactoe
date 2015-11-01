@@ -6,7 +6,7 @@ apply plugin: "java"
 apply plugin: "application"
 apply plugin: "jacoco"
 
-mainClassName = "is.ru.snidgengid.tictactoe.Main"
+mainClassName = "is.ru.snidgengid.tictactoe.Web"
 
 
 jar{
@@ -66,7 +66,7 @@ task seleniumXvfb(type: Test, dependsOn: installDist) {
 
     doFirst {
         'bin/xvfb start'.execute()
-        'build/install/chuck_joke/bin/chuck_joke &'.execute()
+        'build/install/tictactoe/bin/tictactoe &'.execute()
     }
 
     doLast {
