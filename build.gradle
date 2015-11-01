@@ -27,6 +27,15 @@ jacocoTestReport {
     }
 }
 
+
+
+sourceSets {
+    main.java.srcDir "src/main"
+    test.java.srcDir "src/test"
+    selenium
+    seleniumXvfb
+}
+
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.apache.commons:commons-lang3:3.0'
@@ -40,16 +49,15 @@ dependencies {
     testCompile 'com.saucelabs:sauce_junit:2.1.20'
     testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
 
+    seleniumCompile 'junit:junit:4.12'
+    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+
+    seleniumXvfbCompile 'junit:junit:4.12'
+    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
 
 
 
-}
 
-sourceSets {
-    main.java.srcDir "src/main"
-    test.java.srcDir "src/test"
-    selenium
-    seleniumXvfb
 }
 
 
@@ -61,6 +69,7 @@ task selenium(type: Test, dependsOn: installDist) {
 task seleniumXvfb(type: Test, dependsOn: installDist) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
+
 
     environment "DISPLAY", ":99"
 

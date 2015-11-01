@@ -21,6 +21,7 @@ public class SeleniumTest {
     static WebDriver driver;
     static String baseUrl;
     static String port;
+    private StringBuffer verificationErrors = new StringBuffer();
 
     @BeforeClass
     public static void before() {
