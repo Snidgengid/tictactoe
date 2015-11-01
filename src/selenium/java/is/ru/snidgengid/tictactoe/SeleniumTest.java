@@ -58,51 +58,15 @@ public class SeleniumTest {
     }
 
     @Test
-    public void testXwon() throws Exception {
-        driver.get(baseUrl + "/");
-        driver.findElement(By.id("canvas1")).click();
-        driver.findElement(By.id("canvas2")).click();
-        driver.findElement(By.id("canvas3")).click();
-        driver.findElement(By.id("canvas6")).click();
-        driver.findElement(By.id("canvas5")).click();
-        driver.findElement(By.id("canvas4")).click();
-        driver.findElement(By.id("canvas8")).click();
-        driver.findElement(By.id("canvas9")).click();
-        driver.findElement(By.id("canvas7")).click();
-        assertEquals("X has won the game!", closeAlertAndGetItsText());
+    public void testSelenium() throws Exception {
+        selenium.open(baseUrl+ "/");
+        selenium.click("id=canvas1");
+        selenium.click("id=canvas2");
+        selenium.click("id=canvas5");
+        selenium.click("id=canvas8");
+        selenium.click("id=canvas4");
+        selenium.click("id=canvas3");
+        selenium.click("id=canvas6");
+        verifyEquals("", selenium.getText("id=canvas9"));
     }
-
-    private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
-
 }
