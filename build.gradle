@@ -66,7 +66,7 @@ task seleniumXvfb(type: Test, dependsOn: installDist) {
 
     doFirst {
         'bin/xvfb start'.execute()
-        'build/install/tictactoe/bin/tictactoe &'.execute()
+        'java -cp ./build/libs/tictactoe.jar is.ru.snidgengid.tictactoe.Web &'.execute()
     }
 
     doLast {
