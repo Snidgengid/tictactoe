@@ -6,6 +6,7 @@ apply plugin: "java"
 apply plugin: "application"
 apply plugin: "jacoco"
 apply plugin: "checkstyle"
+apply plugin: "findbugs"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Web"
 
@@ -25,6 +26,21 @@ checkstyle {
 }
 tasks.withType(Checkstyle) {
   exclude 'src/test/java/is/ru/snidgengid/tictactoe'
+}
+
+findbugs {
+    ignoreFailures = false
+    toolVersion = '3.0.1'
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = 'max'
+
+    includeFilter = file("$rootProject.projectDir/findbugs/includeFilter.xml")
+    excludeFilter = file("$rootProject.projectDir/findbugs/excludeFilter.xml")
+}
+
+findbugsTest {
+    enabled = true
 }
 
 
