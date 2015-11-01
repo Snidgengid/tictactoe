@@ -1,15 +1,14 @@
 package is.ru.snidgengid.tictactoe;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
 * Implementation of game logic for TicTacToe
 **/
 public class Board {
-	private String board[][];
+	private String[][] board;
 	private String uuid;
-	private final int BOARD_SIZE = 3;
+	private static final int BOARD_SIZE = 3;
 	private Boolean isWon;
 	private Boolean isDraw;
 	private String whoWon;
@@ -38,14 +37,15 @@ public class Board {
 	}
 
 	/**
-	* Check winning criter for horizontal, vertical and diagonal scenarios and checks if a draw has been reached
+	* Check winning criter for horizontal, vertical and diagonal scenarios
+	* and checks if a draw has been reached
 	*/
 	private void checkIfGameIsWonOrDraw() {
 		//This loop checks for a winner in horizontal lines
 		for (int i = 0; i < BOARD_SIZE; i++) {
-			if ( (this.getElement(i, 0) != null) &&
-			        this.getElement(i, 0).equals(this.getElement(i, 1)) &&
-			        this.getElement(i, 1).equals(this.getElement(i, 2)) ) {
+			if ((this.getElement(i, 0) != null)
+				&& (this.getElement(i, 0).equals(this.getElement(i, 1)))
+				&& (this.getElement(i, 1).equals(this.getElement(i, 2)))) {
 				setIsWon(true);
 				setWhoWon(this.getElement(i, 0));
 				return;
@@ -53,26 +53,26 @@ public class Board {
 		}
 		//This loop checks for a winner in vertical lines
 		for (int i = 0; i < BOARD_SIZE; i++) {
-			if ( (this.getElement(0, i) != null) &&
-			        this.getElement(0, i).equals(this.getElement(1, i)) &&
-			        this.getElement(1, i).equals(this.getElement(2, i)) ) {
+			if ((this.getElement(0, i) != null)
+				&& (this.getElement(0, i).equals(this.getElement(1, i)))
+				&& (this.getElement(1, i).equals(this.getElement(2, i)))) {
 				setIsWon(true);
 				setWhoWon(this.getElement(0, i));
 				return;
 			}
 		}
 		//check for a diagonal winning line
-		if (this.getElement(0, 0) != null &&
-		        this.getElement(0, 0).equals(this.getElement(1, 1)) && 
-		        this.getElement(1, 1).equals(this.getElement(2, 2)) ) {
+		if ((this.getElement(0, 0) != null)
+			&& (this.getElement(0, 0).equals(this.getElement(1, 1)))
+		    && (this.getElement(1, 1).equals(this.getElement(2, 2)))) {
 			setIsWon(true);
 			setWhoWon(this.getElement(0, 0));
 			return;
 		}
 		//check for a diagonal winning line
-		if (this.getElement(0, 2) != null &&
-		        this.getElement(0, 2).equals(this.getElement(1, 1)) &&
-		        this.getElement(1, 1).equals(this.getElement(2, 0)) ) {
+		if ((this.getElement(0, 2) != null)
+			&& (this.getElement(0, 2).equals(this.getElement(1, 1)))
+			&& (this.getElement(1, 1).equals(this.getElement(2, 0)))) {
 			setIsWon(true);
 			setWhoWon(this.getElement(0, 2));
 			return;
@@ -80,13 +80,17 @@ public class Board {
 
 		//check if every cell is checked if so it is a draw
 		int counter = 0;
-		for (int i = 0; i < BOARD_SIZE; i++)
+		final int numberOfMovesInDraw = 9;
+		for (int i = 0; i < BOARD_SIZE; i++) {
 			for (int j = 0; j < BOARD_SIZE; j++) {
-				if (board[i][j] != null)
+				if (board[i][j] != null) {
 					counter++;
+				}
 			}
-		if (counter == 9)
+		}
+		if (counter == numberOfMovesInDraw) {
 			setIsDraw(true);
+		}
 	}
 
 	/**
@@ -94,10 +98,11 @@ public class Board {
 	* Toggles the value of nextPlayer between X and O
 	*/
 	private	void switchPlayer() {
-		if (this.nextPlayer.equals("X"))
+		if (this.nextPlayer.equals("X")) {
 			this.nextPlayer = "O";
-		else
+		} else {
 			this.nextPlayer = "X";
+		}
 	}
 
 	/**
@@ -110,29 +115,30 @@ public class Board {
 	* @throws RuntimeException If value is already set
 	*/
 	public void setElement(int i, int j, String value) {
-		if (checkIfMoveValid(i, j))
+		if (checkIfMoveValid(i, j)) {
 			this.board[i][j] = value;
-		else
+		} else {
 			throw new RuntimeException("Cell already taken! Please try again");
+		}
 	}
 
 	/**
 	* checks if the cell is already checked if so it is not a valid move
 	*
 	* @param int i Which row the element is in
-	* @param int j Which column the elemnt is in 
+	* @param int j Which column the elemnt is in
 	* @retun Boolean
 	*/
 	private boolean checkIfMoveValid(int i, int j) {
-		if (this.board[i][j] != null)
+		if (this.board[i][j] != null) {
 			return false;
-		else
-			return true;
+		}
+		return true;
 	}
 
 	/**
 	* Returns next player
-	* @return String Next Player 
+	* @return String Next Player
 	*/
 	public String getNextPlayer() {
 		return this.nextPlayer;
@@ -157,7 +163,7 @@ public class Board {
 
 	/**
 	* Get isDraw
-	* @return Boolean 
+	* @return Boolean
 	**/
 	public boolean getIsDraw() {
 		return this.isDraw;
@@ -197,7 +203,7 @@ public class Board {
 
 	/**
 	* Get UUID
-	* @return String 
+	* @return String
 	**/
 	public String getUUID() {
 		return this.uuid;
@@ -207,7 +213,7 @@ public class Board {
 	* Get element from board
 	* @param i Row of element to fetch
 	* @param j Column of element to fetch
-	* @return String Value at location 
+	* @return String Value at location
 	**/
 	public String getElement(int i, int j) {
 		return this.board[i][j];

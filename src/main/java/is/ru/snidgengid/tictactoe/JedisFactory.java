@@ -1,6 +1,5 @@
 package is.ru.snidgengid.tictactoe;
 
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import java.net.URI;
@@ -16,7 +15,7 @@ class JedisFactory {
   * Constuctor that initializes connection pool for REDIS
   * @throws URISyntaxException
   */
-  public JedisFactory() {
+  JedisFactory() {
     try {
       URI redisURI = null;
       if (System.getenv("REDIS_URL") != null) {
@@ -37,7 +36,7 @@ class JedisFactory {
 
   /**
   * Returns the connection pool
-  * @return JedisPool 
+  * @return JedisPool
   */
   public JedisPool getJedisPool() {
     return jedisPool;
@@ -45,7 +44,7 @@ class JedisFactory {
 
   /**
   * Returns instance of singleton JedisFactory class
-  * @return JedisFactory 
+  * @return JedisFactory
   */
   public static JedisFactory getInstance() {
     if (instance == null) {

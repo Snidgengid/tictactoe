@@ -1,8 +1,5 @@
 package is.ru.snidgengid.tictactoe;
 
-import java.util.Arrays;
-import java.util.UUID;
-
 /**
 * Implementation of GameAction object
 **/
@@ -14,38 +11,38 @@ public class GameAction {
 	/**
 	* Constructor, initialized with invalid game action x and y coordinates
 	**/
-	public GameAction(){
+	public GameAction() {
 		this.uuid = "";
 		this.xCoord = -1;
 		this.yCoord = -1;
 	}
 
 	/**
-	* Get UUID 
+	* Get UUID
 	* @return uuid String
 	**/
-	public String getUUID(){
+	public String getUUID() {
 		return this.uuid;
 	}
 
 	/**
-	* Set UUID 
-	* @param uuid String UUID 
+	* Set UUID
+	* @param uuid String UUID
 	**/
 	public void setUUID(String uuid) {
 		this.uuid = uuid;
 	}
 
 	/**
-	* Get X coordinate (row) 
+	* Get X coordinate (row)
 	* @return xCoord int
 	**/
-	public int getXCoord(){
+	public int getXCoord() {
 		return this.xCoord;
 	}
 
 	/**
-	* Set X coordinate 
+	* Set X coordinate
 	* @param xCoord int X Coordinate
 	**/
 	public void setXCoord(int xCoord) {
@@ -53,18 +50,18 @@ public class GameAction {
 	}
 
 	/**
-	* Get Y coordinate (row) 
+	* Get Y coordinate (row)
 	* @return yCoord int
 	**/
-	public int getYCoord(){
+	public int getYCoord() {
 		return this.yCoord;
 	}
 
 	/**
-	* Set Y coordinate 
-	* @param yCoord int Y Coordinate 
+	* Set Y coordinate
+	* @param yCoord int Y Coordinate
 	**/
-	public void setYCoord(int yCoord){
+	public void setYCoord(int yCoord) {
 		this.yCoord = yCoord;
 	}
 

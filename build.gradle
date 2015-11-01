@@ -5,6 +5,7 @@ repositories {
 apply plugin: "java"
 apply plugin: "application"
 apply plugin: "jacoco"
+apply plugin: "checkstyle"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
@@ -31,6 +32,16 @@ task myJavadocs(type: Javadoc) {
     into 'build/resources/main/www/javadoc'
     }
   }
+}
+
+checkstyle {
+    sourceSets = [sourceSets.main]
+    configFile = rootProject.file('checkstyle/checkstyle.xml')
+    configProperties = [suppressionsFile: rootProject.file('checkstyle/suppressions.xml')]
+    toolVersion = '6.11.2'
+}
+tasks.withType(Checkstyle) {
+  exclude 'src/test/java/is/ru/snidgengid/tictactoe'
 }
 
 
