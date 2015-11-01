@@ -53,7 +53,7 @@ public class SeleniumTest {
         driver.findElement(By.id("canvas4")).click();
         driver.findElement(By.id("newGame")).click();
         try {
-            assertEquals("", driver.findElement(By.id("newGam")).getAttribute("id=newGhfuiewhfime"));
+            assertEquals("", driver.findElement(By.id("newGame")).getAttribute("id=newGame"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
