@@ -1,13 +1,8 @@
 package is.ru.snidgengid.tictactoe;
 
-import static spark.Spark.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import spark.Request;
 import spark.Response;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.easymock.EasyMock;
-
 
 /**
 * Implementation of game handler for Spark Web Framework
@@ -26,7 +21,7 @@ public class GameHandler {
 	* Request handler to create a new game, stores it in the database and returns a json representation of the class Board
 	* @param req Request
 	* @param res Response
-	* @return String 
+	* @return String
 	*/
 	public Object newGame(Request req, Response res) {
 		try {
@@ -46,7 +41,7 @@ public class GameHandler {
 	* Request handler to create a new game, stores it in the database and returns a json representation of the class Board
 	* @param request Object (String or Object)
 	* @param res Response
-	* @return String 
+	* @return String
 	*/
 	public Object action(Object request, Response res) {
 		try {
@@ -56,11 +51,11 @@ public class GameHandler {
 			//Else its treated as a string which contains the body
 			String body;
 			if (request.getClass().isInstance(Request.class)) {
-				Request req = (Request)request;
+				Request req = (Request) request;
 				body = req.body();
-			} else
-				body = (String)request;
-
+			} else {
+				body = (String) request;
+			}
 			ObjectMapper mapper = new ObjectMapper();
 			GameAction gameAction = mapper.readValue(body, GameAction.class);
 
