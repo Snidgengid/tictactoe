@@ -1,12 +1,6 @@
 package is.ru.snidgengid.tictactoe;
 
 import static spark.Spark.*;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import spark.Request;
-import spark.Response;
-import spark.Route;
 
 /**
 * Implementation of TicTacToe web server (main)
@@ -20,19 +14,16 @@ public class Web {
     */
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
-        staticFileLocation("/www"); 
-        get("/newGame", (req, res) -> new GameHandler().newGame(req,res));
-        put("/action", (req, res) -> new GameHandler().action(req,res));
-         
-        
-
+        staticFileLocation("/www");
+        get("/newGame", (req, res) -> new GameHandler().newGame(req, res));
+        put("/action", (req, res) -> new GameHandler().action(req, res));
     }
 
     /**
     * Checks if environmental variable PORT is set and returns it, else it returns 4567
     *
     * @return Integer with assigned port for Web Service
-    */    
+    */
     public static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
