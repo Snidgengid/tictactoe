@@ -8,29 +8,12 @@ apply plugin: "jacoco"
 
 mainClassName = "is.ru.snidgengid.tictactoe.Main"
 
-task copyToLib(type: Copy) {
-    into "$buildDir/lib"
-    from(configurations.compile)
-}
 
 jar{
-    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Web")
+    manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
-    dependsOn copyToLib
-}
-
-task myJavadocs(type: Javadoc) {
-  source = sourceSets.main.allJava
-      classpath = configurations.compile
-
-  doLast {
-    copy {
-    from 'build/docs/javadoc'
-    into 'build/resources/main/www/javadoc'
-    }
-  }
 }
 
 
@@ -52,26 +35,54 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
     compile 'redis.clients:jedis:2.7.3'
-    compile 'org.cthul:cthul-matchers:1.1.0'
-    compile 'org.easymock:easymock:3.4'
+    testCompile 'org.cthul:cthul-matchers:1.1.0'
+    testCompile 'org.easymock:easymock:3.4'
+    testCompile 'com.saucelabs:sauce_junit:2.1.20'
+    testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+
+
+
 
 }
 
 sourceSets {
     main.java.srcDir "src/main"
+    test.java.srcDir "src/test"
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
 }
 
 task stage {
     dependsOn build
 }
 
-compileJava.dependsOn(myJavadocs)
-check.dependsOn(jacocoTestReport, myJavadocs)
+check.dependsOn jacocoTestReport
+integrationTest.mustRunAfter test
 
-
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
 
 compileJava {
     options.compilerArgs << '-Xlint:deprecation'
 }
 
-stage.dependsOn(copyToLib, myJavadocs)
+stage.dependsOn(copyToLib)
