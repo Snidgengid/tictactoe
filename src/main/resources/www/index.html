@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css.css"/>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Game Handling class -->
 <script type="text/javascript">
 
@@ -16,6 +16,11 @@ var cxt;
 var squaresFilled = 0;
 var turn = 0;
 
+$("button").click(function(){
+$.getJSON("/newGame", function(result){
+  console.log(result);
+});
+});
 
 
 	var TicTacToe = {
@@ -68,32 +73,7 @@ var turn = 0;
   turn++; //Hér skiptum við yfir svo að næsti player á að gera. 
   painted[canvasNumber-1] = true; // Hér segjum við að þessi kassi er fyltur.
   squaresFilled++; //Hér er að fyllast í kassana.
-  //checkForWinners(content[canvasNumber-1]);
-
-//Þegar allir 9 reitirnir eru fullir kemur leik lokið eða þegar í notkun ef ákveðinn reitur ef fullur þá kemur Þegar í notun. 
-  if(squaresFilled==9){ 
-  	alert("LEIK LOKIÐ!");
-  }
-  	}
-  	else {
-  		alert("ÞEGAR Í NOTKUN");
-  	}
-  }
-
-/*function checkForWinners(symbol) //Hér kemur alert þegar einhver vinnur.
-{
-      for(var a = 0; a < winningCombinations.length; a++){
-        if(content[winningCombinations[a][0]]==symbol&&content[winningCombinations[a][1]]==symbol&&content[winningCombinations[a][2]]==symbol){
-          alert(symbol+ "Er sigurvegarinn!");
-          //newGame();
-        }
-      }
-
-
-}*/
-
-
-
+  }}
 
 
 </script>
@@ -120,17 +100,7 @@ var turn = 0;
 </div>
 
 
-<input id="newGame" type="button" value="New game" onclick="newGame();" />
-
-<script type="text/javascript">
-	newGame: function(){
-		"board": [[null,null,null], [null,null,null],[null,null,null]],
-		"uuid": "",
-		"isWon": false,
-		"isDraw": false,
-		"nextPlayer": "x"
-	}
-</script>
+<input id="newGame" type="button" value="New game" />
 
 
 <div class="ErrorText"></div>
