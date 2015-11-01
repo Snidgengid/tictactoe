@@ -165,7 +165,7 @@ public class Board {
 
 	/**
 	* Get setIsDraw
-	* @param  isDraw 
+	* @param  isDraw isDraw
 	**/
 	public void setIsDraw(boolean isDraw) {
 		this.isDraw = isDraw;
@@ -181,7 +181,7 @@ public class Board {
 
 	/**
 	* Set isWon
-	* @param isWon
+	* @param isWon isWon
 	**/
 	public void setIsWon(Boolean isWon) {
 		this.isWon = isWon;
