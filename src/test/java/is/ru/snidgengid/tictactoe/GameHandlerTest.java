@@ -46,35 +46,61 @@ public class GameHandlerTest {
 
 	@Test
 	public void testFirstActionOnGame() {
-		try{
-		//Create new game
-		GameHandler game = new GameHandler();
-		Response res = EasyMock.createMock(Response.class);
-		Request req = EasyMock.createMock(Request.class);
-		String gameJSON = (String)game.newGame(req, res);
-		System.out.println(gameJSON);
+		try {
+			//Create new game
+			GameHandler game = new GameHandler();
+			Response res = EasyMock.createMock(Response.class);
+			Request req = EasyMock.createMock(Request.class);
+			String gameJSON = (String)game.newGame(req, res);
+			System.out.println(gameJSON);
 
-		//Create board object from response
-		ObjectMapper mapper = new ObjectMapper();
-		Board board = mapper.readValue(gameJSON,Board.class);
+			//Create board object from response
+			ObjectMapper mapper = new ObjectMapper();
+			Board board = mapper.readValue(gameJSON,Board.class);
 
-		//Create game action object and set action
-		GameAction action = new GameAction();
-		action.setXCoord(1);
-		action.setYCoord(1);
-		action.setUUID(board.getUUID());
+			//Create game action object and set action
+			GameAction action = new GameAction();
+			action.setXCoord(1);
+			action.setYCoord(1);
+			action.setUUID(board.getUUID());
 
-		//Create json string of action for request
-		String actionJSON = mapper.writeValueAsString(action);
-		String actionResponse = (String)game.action(actionJSON,res);
-		System.out.println(actionResponse);
-		assertNotEquals(actionResponse,gameJSON);
-		assertThat(actionResponse,matchesPattern(BOARD_FIRST_ACTION_JSON_REGEX));
-		}
-		catch (Exception e) {
+			//Create json string of action for request
+			String actionJSON = mapper.writeValueAsString(action);
+			String actionResponse = (String)game.action(actionJSON,res);
+			System.out.println(actionResponse);
+			assertNotEquals(actionResponse,gameJSON);
+			assertThat(actionResponse,matchesPattern(BOARD_FIRST_ACTION_JSON_REGEX));
+		} catch (Exception e) {
 			fail("FAIIIIL");
 		}
 	}
 
+		@Test
+		public void testActionOnGameWithRequest() {
+			try {
+				//Create new game
+				GameHandler game = new GameHandler();
+				Response res = EasyMock.createMock(Response.class);
+				Request req = EasyMock.createMock(Request.class);
+				String gameJSON = (String)game.newGame(req, res);
+				System.out.println(gameJSON);
+
+				//Create board object from response
+				ObjectMapper mapper = new ObjectMapper();
+				Board board = mapper.readValue(gameJSON,Board.class);
+
+				//Create game action object and set action
+				GameAction action = new GameAction();
+				action.setXCoord(1);
+				action.setYCoord(1);
+				action.setUUID(board.getUUID());
+
+				//Create json string of action for request
+				String actionResponse = (String)game.action(req,res);
+				
+		} catch (Exception e) {
+				assertEquals("Error making action", e.getMessage());
+		}
+	}
 }
 
