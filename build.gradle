@@ -35,10 +35,10 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
     compile 'redis.clients:jedis:2.7.3'
-    compile 'org.cthul:cthul-matchers:1.1.0'
-    compile 'org.easymock:easymock:3.4'
-    compile 'com.saucelabs:sauce_junit:2.1.20'
-    compile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+    testCompile 'org.cthul:cthul-matchers:1.1.0'
+    testCompile 'org.easymock:easymock:3.4'
+    testCompile 'com.saucelabs:sauce_junit:2.1.20'
+    testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
 
 
 
@@ -47,6 +47,26 @@ dependencies {
 
 sourceSets {
     main.java.srcDir "src/main"
+    test.java.srcDir "src/test"
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
 }
 
 task stage {
@@ -54,6 +74,7 @@ task stage {
 }
 
 check.dependsOn jacocoTestReport
+integrationTest.mustRunAfter test
 
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
