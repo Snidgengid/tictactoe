@@ -1,58 +1,80 @@
 package is.ru.snidgengid.tictactoe;
 
-import com.thoughtworks.selenium.Selenium;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.WebDriver;
-import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
-import static org.junit.Assert.*;
-import java.util.regex.Pattern;
-import static org.apache.commons.lang3.StringUtils.join;
 
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
+import org.junit.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class SeleniumTest {
+  private WebDriver driver;
+  private String baseUrl;
+  private boolean acceptNextAlert = true;
+  private StringBuffer verificationErrors = new StringBuffer();
 
-    static WebDriver driver;
-    static String baseUrl;
-    static String port;
-    private boolean acceptNextAlert = true;
-    private StringBuffer verificationErrors = new StringBuffer();
+  @Before
+  public void setUp() throws Exception {
+    driver = new FirefoxDriver();
+    baseUrl = "http://localhost:4567";
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
 
-    @Before
-    public static void before() {
-        driver = new FirefoxDriver();
-        port = System.getenv("PORT");
-        if (port == null) {
-            port = "4567";
-        }
-        baseUrl = "http://localhost:" + port;
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  @Test
+  public void testSeleinum() throws Exception {
+    driver.get(baseUrl + "/");
+    driver.findElement(By.id("canvas1")).click();
+    driver.findElement(By.id("canvas2")).click();
+    driver.findElement(By.id("canvas5")).click();
+    driver.findElement(By.id("canvas8")).click();
+    driver.findElement(By.id("canvas4")).click();
+    driver.findElement(By.id("canvas3")).click();
+    driver.findElement(By.id("canvas6")).click();
+    assertTrue(isAlertPresent());
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    driver.quit();
+    String verificationErrorString = verificationErrors.toString();
+    if (!"".equals(verificationErrorString)) {
+      fail(verificationErrorString);
     }
+  }
 
-    @After
-    public static void after() {
-        driver.close();
+  private boolean isElementPresent(By by) {
+    try {
+      driver.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
     }
+  }
 
-    @Before
-    public void setup() {
-        ;
+  private boolean isAlertPresent() {
+    try {
+      driver.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
     }
+  }
 
-    @Test
-    public void testSelenium() throws Exception {
-        selenium.open(baseUrl+ "/");
-        selenium.click("id=canvas1");
-        selenium.click("id=canvas2");
-        selenium.click("id=canvas5");
-        selenium.click("id=canvas8");
-        selenium.click("id=canvas4");
-        selenium.click("id=canvas3");
-        selenium.click("id=canvas6");
-        verifyEquals("", selenium.getText("id=canvas9"));
+  private String closeAlertAndGetItsText() {
+    try {
+      Alert alert = driver.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
     }
+  }
 }
