@@ -182,7 +182,7 @@ public class SeleniumTest implements SauceOnDemandSessionIdProvider {
 
     @Test
     public void test() throws Exception {
-        driver.get("/");
+        driver.get("http://localhost:4567/");
         driver.findElement(By.id("canvas1")).click();
         driver.findElement(By.id("canvas2")).click();
         driver.findElement(By.id("canvas5")).click();
