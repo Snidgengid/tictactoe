@@ -123,28 +123,28 @@ public class SeleniumTest implements SauceOnDemandSessionIdProvider {
         browsers.add(new String[] {"Windows 7", "41", "chrome", null, null});
 
         // windows xp, IE 8
-        browsers.add(new String[] {"Windows XP", "8", "internet explorer", null, null});
+        //browsers.add(new String[] {"Windows XP", "8", "internet explorer", null, null});
 
         // windows 7, IE 9
-        browsers.add(new String[] {"Windows 7", "9", "internet explorer", null, null});
+        //browsers.add(new String[] {"Windows 7", "9", "internet explorer", null, null});
 
         // windows 8, IE 10
-        browsers.add(new String[] {"Windows 8", "10", "internet explorer", null, null});
+        //browsers.add(new String[] {"Windows 8", "10", "internet explorer", null, null});
 
         // windows 8.1, IE 11
-        browsers.add(new String[] {"Windows 8.1", "11", "internet explorer", null, null});
+        //browsers.add(new String[] {"Windows 8.1", "11", "internet explorer", null, null});
 
         // OS X 10.8, Safari 6
-        browsers.add(new String[] {"OSX 10.8", "6", "safari", null, null});
+        //browsers.add(new String[] {"OSX 10.8", "6", "safari", null, null});
 
         // OS X 10.9, Safari 7
-        browsers.add(new String[] {"OSX 10.9", "7", "safari", null, null});
+        //browsers.add(new String[] {"OSX 10.9", "7", "safari", null, null});
 
         // OS X 10.10, Safari 7
-        browsers.add(new String[] {"OSX 10.10", "8", "safari", null, null});
+        //browsers.add(new String[] {"OSX 10.10", "8", "safari", null, null});
 
         // Linux, Firefox 37
-        browsers.add(new String[] {"Linux", "37", "firefox", null, null});
+        //browsers.add(new String[] {"Linux", "37", "firefox", null, null});
 
         return browsers;
     }
@@ -182,7 +182,7 @@ public class SeleniumTest implements SauceOnDemandSessionIdProvider {
 
     @Test
     public void test() throws Exception {
-        driver.get("http://localhost:4567/");
+        driver.get("http://localhost:4445/");
         driver.findElement(By.id("canvas1")).click();
         driver.findElement(By.id("canvas2")).click();
         driver.findElement(By.id("canvas4")).click();
