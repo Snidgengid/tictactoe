@@ -107,19 +107,6 @@ task selenium(type: Test, dependsOn: installDist) {
 task seleniumXvfb(type: Test, dependsOn: installDist) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
-
-
-    environment "DISPLAY", ":99"
-
-    doFirst {
-        'bin/xvfb start'.execute()
-        'build/install/tictactoe/bin/tictactoe &'.execute()
-    }
-
-    doLast {
-        'sh -e /etc/init.d/xvfb stop'.execute()
-        'pkill java'.execute()
-    }
 }
 
 
