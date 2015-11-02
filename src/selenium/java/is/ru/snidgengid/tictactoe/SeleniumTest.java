@@ -23,7 +23,7 @@ public class SeleniumTest {
   }
 
   @Test
-  public void testSeleinum() throws Exception {
+  public void testXWon() throws Exception {
     driver.get(baseUrl + "/");
     Thread.sleep(1000);    
     driver.findElement(By.id("canvas1")).click();
@@ -41,8 +41,10 @@ public class SeleniumTest {
     driver.findElement(By.id("canvas6")).click();
     Thread.sleep(1000);
     for (int second = 0;; second++) {
-        if (second >= 60) fail("timeout");
-        try { if ("O has won the game!".equals(driver.findElement(By.cssSelector("div.whoWon")).getText())) break; } catch (Exception e) {}
+        if (second >= 5) {
+            fail("Game has not indicated that X has won");
+        }
+        try { if ("X has won the game!".equals(driver.findElement(By.cssSelector("div.whoWon")).getText())) break; } catch (Exception e) {}
         Thread.sleep(1000);
     }
 
