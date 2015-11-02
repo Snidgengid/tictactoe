@@ -42,7 +42,7 @@ public class SeleniumTest {
     Thread.sleep(1000);
     for (int second = 0;; second++) {
         if (second >= 60) fail("timeout");
-        try { if ("X has won the game!".equals(driver.findElement(By.cssSelector("div.whoWon")).getText())) break; } catch (Exception e) {}
+        try { if ("O has won the game!".equals(driver.findElement(By.cssSelector("div.whoWon")).getText())) break; } catch (Exception e) {}
         Thread.sleep(1000);
     }
 
