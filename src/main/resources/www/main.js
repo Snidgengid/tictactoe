@@ -11,6 +11,7 @@ var tictactoe;
 $("button").click(function(){
 $.getJSON("/newGame", function(result){
   updateGame(result)
+  $('.whoWon').text("");
 });
 });
 
