@@ -34,7 +34,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
-  - gradle run
+  - java -cp ./build/libs/tictactoe.jar is.ru.snidgengid.tictactoe.Web &
   - sleep 3
 
 before_install:
