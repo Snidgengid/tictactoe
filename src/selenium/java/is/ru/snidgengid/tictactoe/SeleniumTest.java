@@ -64,10 +64,10 @@ public class SeleniumTest {
     Thread.sleep(500);
     driver.findElement(By.id("canvas9")).click();
     Thread.sleep(500);
-    assertEquals("O has won the game!", driver.findElement(By.cssSelector("div.whoWon")).getText());
+    assertEquals("X has won the game!", driver.findElement(By.cssSelector("div.whoWon")).getText());
     driver.findElement(By.id("newGame")).click();
     try {
-      assertEquals("3", driver.findElement(By.cssSelector("div.whoWon")).getText());
+      assertEquals("", driver.findElement(By.cssSelector("div.whoWon")).getText());
     } catch (Error e) {
       verificationErrors.append(e.toString());
     }
@@ -95,7 +95,7 @@ public class SeleniumTest {
     Thread.sleep(500);
     driver.findElement(By.id("canvas7")).click();
     Thread.sleep(500);
-    assertEquals("Hhis is a draw", driver.findElement(By.cssSelector("div.whoWon")).getText());
+    assertEquals("This is a draw", driver.findElement(By.cssSelector("div.whoWon")).getText());
   }
 
   @Test
@@ -118,7 +118,7 @@ public class SeleniumTest {
     Thread.sleep(500);
     driver.findElement(By.id("canvas3")).click();
     Thread.sleep(1000);
-    assertEquals("J has won the game!", driver.findElement(By.cssSelector("div.whoWon")).getText());
+    assertEquals("O has won the game!", driver.findElement(By.cssSelector("div.whoWon")).getText());
   }
 
   @After
