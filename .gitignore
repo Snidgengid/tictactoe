@@ -9,10 +9,16 @@ build
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 .*.swp
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Hidden Files
+.DS_Store
+
+
+#MISC
+dump.rdb

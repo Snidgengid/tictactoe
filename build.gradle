@@ -4,8 +4,12 @@ repositories {
 
 apply plugin: "java"
 apply plugin: "application"
+apply plugin: "jacoco"
+apply plugin: "checkstyle"
+apply plugin: "findbugs"
 
-mainClassName = "is.ru.snidgengid.tictactoe.Main"
+mainClassName = "is.ru.snidgengid.tictactoe.Web"
+
 
 jar{
     manifest.mainAttributes("Main-Class" : "is.ru.snidgengid.tictactoe.Main")
@@ -14,14 +18,112 @@ jar{
     }
 }
 
+task myJavadocs(type: Javadoc) {
+  source = sourceSets.main.allJava
+      classpath = configurations.compile
+
+  doLast {
+    copy {
+    from 'build/docs/javadoc'
+    into 'build/resources/main/www/javadoc'
+    }
+  }
+}
+
+checkstyle {
+    sourceSets = [sourceSets.main]
+    configFile = rootProject.file('checkstyle/checkstyle.xml')
+    configProperties = [suppressionsFile: rootProject.file('checkstyle/suppressions.xml')]
+    toolVersion = '6.11.2'
+}
+tasks.withType(Checkstyle) {
+  exclude 'src/test/java/is/ru/snidgengid/tictactoe'
+}
+
+findbugs {
+    ignoreFailures = false
+    toolVersion = '3.0.1'
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = 'max'
+
+    includeFilter = file("$rootProject.projectDir/findbugs/includeFilter.xml")
+    excludeFilter = file("$rootProject.projectDir/findbugs/excludeFilter.xml")
+}
+
+findbugsTest {
+    enabled = true
+}
+
+
+jacocoTestReport {
+    group = "reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+}
+
+
+
+sourceSets {
+    main.java.srcDir "src/main"
+    test.java.srcDir "src/test"
+    selenium
+    seleniumXvfb
+}
+
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'com.sparkjava:spark-core:2.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
+    compile 'redis.clients:jedis:2.7.3'
+    testCompile 'org.cthul:cthul-matchers:1.1.0'
+    testCompile 'org.easymock:easymock:3.4'
+    testCompile 'com.saucelabs:sauce_junit:2.1.20'
+    testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+
+    seleniumCompile 'junit:junit:4.12'
+    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+
+    seleniumXvfbCompile 'junit:junit:4.12'
+    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
 }
 
-sourceSets {
-    main.java.srcDir "src/main"
+
+task selenium(type: Test, dependsOn: installDist) {
+    testClassesDir = sourceSets.selenium.output.classesDir
+    classpath = sourceSets.selenium.runtimeClasspath
+    doFirst {
+        'java -cp ./build/libs/tictactoe.jar is.ru.snidgengid.tictactoe.Web &'.execute()
+    }
+}
+
+task seleniumXvfb(type: Test, dependsOn: installDist) {
+    testClassesDir = sourceSets.selenium.output.classesDir
+    classpath = sourceSets.selenium.runtimeClasspath
 }
 
 
+task stage {
+    dependsOn build
+}
+
+compileJava.dependsOn(myJavadocs)
+check.dependsOn(jacocoTestReport, myJavadocs)
+
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
+compileJava {
+    options.compilerArgs << '-Xlint:deprecation'
+}
+
+stage.dependsOn(copyToLib, myJavadocs)
