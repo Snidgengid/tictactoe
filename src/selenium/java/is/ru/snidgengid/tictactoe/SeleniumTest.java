@@ -1,61 +1,165 @@
 package is.ru.snidgengid.tictactoe;
 
+import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.AfterClass;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import org.openqa.selenium.By;
+import org.junit.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.ui.Select;
 
 public class SeleniumTest {
+  private WebDriver driver;
+  private String baseUrl;
+  private boolean acceptNextAlert = true;
+  private StringBuffer verificationErrors = new StringBuffer();
 
-    static WebDriver driver;
-    static String baseUrl;
-    static String port;
-    private StringBuffer verificationErrors = new StringBuffer();
+  @Before
+  public void setUp() throws Exception {
+    driver = new FirefoxDriver();
+    baseUrl = "http://localhost:4567";
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
 
-    @BeforeClass
-    public static void before() {
-        driver = new FirefoxDriver();
-        port = System.getenv("PORT");
-        if(port == null) {
-            port = "4567";
+  @Test
+  public void testXWon() throws Exception {
+    driver.get(baseUrl + "/");
+    Thread.sleep(1500);    
+    driver.findElement(By.id("canvas1")).click();
+    Thread.sleep(500);    
+    driver.findElement(By.id("canvas2")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas5")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas8")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas4")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas3")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas6")).click();
+    Thread.sleep(500);
+    for (int second = 0;; second++) {
+        if (second >= 5) {
+            fail("Game has not indicated that X has won");
         }
-        baseUrl = "http://localhost:" + port;
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        try { if ("X has won the game!".equals(driver.findElement(By.cssSelector("div.whoWon")).getText())) break; } catch (Exception e) {}
+        Thread.sleep(1000);
     }
 
-    @AfterClass
-    public static void after() {
-        driver.close();
-    }
+  }
 
-    @Before
-    public void setup() {
-        ;
+  @Test
+  public void testNewGame() throws Exception {
+    driver.get(baseUrl + "/");
+    Thread.sleep(1500);
+    driver.findElement(By.id("canvas1")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas2")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas5")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas8")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas9")).click();
+    Thread.sleep(500);
+    assertEquals("X has won the game!", driver.findElement(By.cssSelector("div.whoWon")).getText());
+    driver.findElement(By.id("newGame")).click();
+    try {
+      assertEquals("", driver.findElement(By.cssSelector("div.whoWon")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
     }
+  }
 
-   
-    @Test
-    public void test() throws Exception {
-        driver.get(baseUrl + "/");
-        driver.findElement(By.id("canvas1")).click();
-        driver.findElement(By.id("canvas2")).click();
-        driver.findElement(By.id("canvas4")).click();
-        driver.findElement(By.id("newGame")).click();
-        try {
-            assertEquals("", driver.findElement(By.id("newGame")).getAttribute("id=newGame"));
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-        }
+  @Test
+  public void testIsDraw() throws Exception {
+    driver.get(baseUrl + "/");
+    Thread.sleep(1500);
+    driver.findElement(By.id("canvas1")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas4")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas2")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas5")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas6")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas3")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas8")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas9")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas7")).click();
+    Thread.sleep(500);
+    assertEquals("This is a draw", driver.findElement(By.cssSelector("div.whoWon")).getText());
+  }
+
+  @Test
+  public void testOWon() throws Exception {
+    driver.get(baseUrl + "/");
+    Thread.sleep(1500);
+    driver.findElement(By.id("canvas4")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas7")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas8")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas5")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas6")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas1")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas2")).click();
+    Thread.sleep(500);
+    driver.findElement(By.id("canvas3")).click();
+    Thread.sleep(1000);
+    assertEquals("O has won the game!", driver.findElement(By.cssSelector("div.whoWon")).getText());
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    driver.quit();
+    String verificationErrorString = verificationErrors.toString();
+    if (!"".equals(verificationErrorString)) {
+      fail(verificationErrorString);
     }
+  }
+
+  private boolean isElementPresent(By by) {
+    try {
+      driver.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  private boolean isAlertPresent() {
+    try {
+      driver.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  private String closeAlertAndGetItsText() {
+    try {
+      Alert alert = driver.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
+    }
+  }
 }

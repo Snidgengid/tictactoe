@@ -99,23 +99,14 @@ dependencies {
 task selenium(type: Test, dependsOn: installDist) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
+    doFirst {
+        'java -cp ./build/libs/tictactoe.jar is.ru.snidgengid.tictactoe.Web &'.execute()
+    }
 }
 
 task seleniumXvfb(type: Test, dependsOn: installDist) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
-
-
-    environment "DISPLAY", ":99"
-
-    doFirst {
-        'bin/xvfb start'.execute()
-        'java -cp ./build/libs/tictactoe.jar is.ru.snidgengid.tictactoe.Web &'.execute()
-    }
-
-    doLast {
-        'sh -e /etc/init.d/xvfb stop'.execute()
-    }
 }
 
 
