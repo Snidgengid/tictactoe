@@ -31,4 +31,4 @@ notifications:
     on_start: always     # options: [always|never|change] default: always
 script:
 - ./gradlew check
-- ./gradlew seleniumXvfb
+- ./gradlew seleniumXvfb --info
