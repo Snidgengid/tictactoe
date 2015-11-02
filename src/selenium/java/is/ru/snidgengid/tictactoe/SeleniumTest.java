@@ -1,6 +1,5 @@
 package is.ru.snidgengid.tictactoe;
 
-
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -26,14 +25,27 @@ public class SeleniumTest {
   @Test
   public void testSeleinum() throws Exception {
     driver.get(baseUrl + "/");
+    Thread.sleep(1000);    
     driver.findElement(By.id("canvas1")).click();
+    Thread.sleep(1000);    
     driver.findElement(By.id("canvas2")).click();
+    Thread.sleep(1000);
     driver.findElement(By.id("canvas5")).click();
+    Thread.sleep(1000);
     driver.findElement(By.id("canvas8")).click();
+    Thread.sleep(1000);
     driver.findElement(By.id("canvas4")).click();
+    Thread.sleep(1000);
     driver.findElement(By.id("canvas3")).click();
+    Thread.sleep(1000);
     driver.findElement(By.id("canvas6")).click();
-    assertTrue(isAlertPresent());
+    Thread.sleep(1000);
+    for (int second = 0;; second++) {
+        if (second >= 60) fail("timeout");
+        try { if ("X has won the game!".equals(driver.findElement(By.cssSelector("div.whoWon")).getText())) break; } catch (Exception e) {}
+        Thread.sleep(1000);
+    }
+
   }
 
   @After

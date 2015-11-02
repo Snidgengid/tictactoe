@@ -99,6 +99,9 @@ dependencies {
 task selenium(type: Test, dependsOn: installDist) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
+    doFirst {
+        'build/install/tictactoe/bin/tictactoe &'.execute()
+    }
 }
 
 task seleniumXvfb(type: Test, dependsOn: installDist) {
@@ -110,11 +113,12 @@ task seleniumXvfb(type: Test, dependsOn: installDist) {
 
     doFirst {
         'bin/xvfb start'.execute()
-        'java -cp ./build/libs/tictactoe.jar is.ru.snidgengid.tictactoe.Web &'.execute()
+        'build/install/tictactoe/bin/tictactoe &'.execute()
     }
 
     doLast {
         'sh -e /etc/init.d/xvfb stop'.execute()
+        'pkill java'.execute()
     }
 }
 

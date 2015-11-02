@@ -82,11 +82,11 @@ $.getJSON("/newGame", function(result){
         updateGame(result);
         if (tictactoe.isWon)
         {
-          alert(tictactoe.whoWon + " has won the game!");
+          $('.whoWon').text(tictactoe.whoWon + " has won the game!");
         }
         else if (tictactoe.isDraw)
         {
-          alert("This is a draw");
+          $('.whoWon').text("This is a draw");
         }
       }
     }
