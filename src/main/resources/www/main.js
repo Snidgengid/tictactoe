@@ -16,16 +16,6 @@ $.getJSON("/newGame", function(result){
 });
 
 
-
-	var TicTacToe = {
-		"board": [[null,null,null], [null,null,null],[null,null,null]],
-		"uuid": "",
-		"isWon": false,
-		"isDraw": false,
-		"nextPlayer": "x"
-	};
-
-
   window.onload=function(){
     $.getJSON("/newGame", function(result){
       updateGame(result)
@@ -33,7 +23,6 @@ $.getJSON("/newGame", function(result){
     painted = new Array();
     content = new Array();
     var game;
-    winningCombination = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
     for(var l = 0; l <= 8; l++){
 
@@ -75,7 +64,7 @@ $.getJSON("/newGame", function(result){
     url: '/action',
     type: 'PUT',
     dataType   : 'json',
-    contentType: 'application/json; charset=UTF-8', // This is the money shot
+    contentType: 'application/json; charset=UTF-8',
     data: JSON.stringify(action),
     success: function(result) {
       if (result != "Error making action")
@@ -92,8 +81,6 @@ $.getJSON("/newGame", function(result){
       }
     }
     });
-
-
 
 
     }
