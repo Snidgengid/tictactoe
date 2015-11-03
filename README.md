@@ -15,4 +15,4 @@ An implementation of the classic game TicTacToe using Java with the Spark Micro 
 
 [![codecov.io](https://codecov.io/github/Snidgengid/tictactoe/coverage.svg?branch=master)](https://codecov.io/github/Snidgengid/codecov.io?branch=master)
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=snidgengid)]
+![Heroku](https://heroku-badge.herokuapp.com/?app=snidgengid)
