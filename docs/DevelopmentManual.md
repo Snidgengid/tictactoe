@@ -55,7 +55,7 @@ Clone our repo and build and run tictactoe on your machine, or develop.
  #Browse to http://localhost:4567
  ```
 ##Continuous Integration pipeline
-![](https://github.com/Snidgengid/tictactoe/blob/docs/docs/images/flowchart.png)
+![](https://github.com/Snidgengid/tictactoe/blob/dev/images/flowchart2.png)
 ##Heroku
 Different branches are deployed to different locations on heroku:
 - master branch: [Snidgengid](http://snidgengid.herokuapp.com/)
